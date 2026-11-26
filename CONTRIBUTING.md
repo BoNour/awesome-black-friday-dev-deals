@@ -37,7 +37,7 @@ A deal is listed when all of these hold:
 - **The discount is specific.** "40% off annual plans" or "$50 off", in 60 characters or fewer. A percentage must be between 1 and 100.
 - **The description is plain.** One sentence on what the product is, 160 characters or fewer, no sales copy.
 - **A logo helps, and is optional.** A link to your product's logo or app icon: square, at least 128 pixels wide, png, jpg or webp. If you leave it empty, the icon your site declares is used.
-- **The image is yours, and optional.** A link to your own banner or social image: png, jpg or webp, up to 5 MB. If you leave it empty, the social image from your page is used. It will sit next to your deal on the dev.express site when that opens. The site keeps its own copy, so your server is not hit on every visit.
+- **The image is yours, and optional.** A link to your own banner or social image: png, jpg or webp, up to 5 MB. If you leave it empty, the social image from your page is used. It sits next to your deal on [dev.express](https://dev.express/black-friday/). The site keeps its own copy, so your server is not hit on every visit.
 - **It is not already listed.**
 
 Never listed: general retail (clothing, watches, beauty, household goods), gambling, adult content, crypto and get-rich schemes. The list is for software and tools that developers, founders and AI builders use.
@@ -46,7 +46,7 @@ Never listed: general retail (clothing, watches, beauty, household goods), gambl
 
 | Reply | Meaning | What to do |
 |---|---|---|
-| "is live" | Your pull request is merged and the deal is in the README | Nothing. A star or a share is welcome; your listing stays either way |
+| "is live" | Your pull request is merged and the deal is in the README and on dev.express | Nothing. A star or a share is welcome; your listing stays either way |
 | "nearly there" | A line is missing or malformed | Edit your file in the pull request (Files changed, the three dots, Edit file); it gets looked at again by itself |
 | "nearly in" | Everything looks right, but the link would not open automatically | Nothing; the maintainer opens the page and merges it |
 | "not one for this list" | The deal breaks a rule | Reply on the pull request if you think we got it wrong |
@@ -62,4 +62,4 @@ npm test          # the review rules
 npm run build     # regenerate the README tables and data/site.json
 ```
 
-`data/site.json` is the same list as plain data. The dev.express site, which is on its way, reads it.
+`data/site.json` is the same list as plain data. The website at [dev.express/black-friday](https://dev.express/black-friday/) reads it.

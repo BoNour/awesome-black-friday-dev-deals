@@ -77,11 +77,18 @@ test('url check keeps the query the vendor needs', () => {
 });
 
 const ctx = { repo: 'meSingh/awesome-black-friday-dev-deals', site: 'https://example.dev/deals/', user: 'octo-cat' };
-test('until the website is released, replies stay on GitHub and offer no badge', () => {
-  const body = comment({ verdict: 'approve', reasons: [], deal: { id: 'acme-cli', name: 'Acme CLI', discount: '40% off', code: '', categoryName: 'Developer tools' } }, { repo: 'meSingh/awesome-black-friday-dev-deals', user: 'octo-cat' });
+test('with no site set, replies stay on GitHub and offer no badge', () => {
+  const body = comment({ verdict: 'approve', reasons: [], deal: { id: 'acme-cli', name: 'Acme CLI', discount: '40% off', code: '', categoryName: 'Developer tools' } }, { repo: 'meSingh/awesome-black-friday-dev-deals', site: '', user: 'octo-cat' });
   assert.ok(!/https:\/\/dev\.express|%2F%2Fdev\.express|github\.io|badge/i.test(body));
   assert.ok(body.includes('See it in the [README](https://github.com/meSingh/awesome-black-friday-dev-deals#developer-tools).'));
   assert.ok(body.includes('&url=https%3A%2F%2Fgithub.com%2FmeSingh%2Fawesome-black-friday-dev-deals)'));
+});
+test('replies point at dev.express by default, and say where the visitor came from', () => {
+  const body = comment({ verdict: 'approve', reasons: [], deal: { id: 'acme-cli', name: 'Acme CLI', discount: '40% off', code: '', categoryName: 'Developer tools' } }, { repo: 'meSingh/awesome-black-friday-dev-deals', user: 'octo-cat' });
+  assert.ok(body.includes('on [the site](https://dev.express/black-friday/?utm_source=github&utm_medium=referral&utm_campaign=black-friday-2026#deal-acme-cli)'));
+  assert.ok(body.includes('utm_source%3Dshare'));
+  assert.ok(body.includes('utm_source=badge'));
+  assert.ok(!body.includes('github.io'));
 });
 test('seller links carry our utm tags and nothing else changes', () => {
   const tags = 'utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026';
@@ -97,14 +104,14 @@ test('the approval reply greets, links, asks without requiring, and credits nobo
   const body = comment({ verdict: 'approve', reasons: [], deal: { id: 'acme-cli', name: 'Acme CLI', discount: '40% off & more', code: 'BF26', categoryName: 'Developer tools' } }, ctx);
   assert.match(body, /^@octo-cat \*\*Acme CLI is live\.\*\*/);
   assert.ok(body.includes('#developer-tools'));
-  assert.ok(body.includes('https://example.dev/deals/#deal-acme-cli'));
-  assert.ok(body.includes('twitter.com/intent/tweet?text=Acme%20CLI%20is%20on%20the%20dev.express%20Black%20Friday%20list%3A%2040%25%20off%20%26%20more%20with%20code%20BF26.&url=https%3A%2F%2Fexample.dev%2Fdeals%2F'));
-  assert.ok(body.includes('linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fexample.dev%2Fdeals%2F'));
+  assert.ok(body.includes('https://example.dev/deals/?utm_source=github&utm_medium=referral&utm_campaign=black-friday-2026#deal-acme-cli'));
+  assert.ok(body.includes('twitter.com/intent/tweet?text=Acme%20CLI%20is%20on%20the%20dev.express%20Black%20Friday%20list%3A%2040%25%20off%20%26%20more%20with%20code%20BF26.&url=https%3A%2F%2Fexample.dev%2Fdeals%2F%3Futm_source%3Dshare%26utm_medium%3Dreferral%26utm_campaign%3Dblack-friday-2026'));
+  assert.ok(body.includes('linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fexample.dev%2Fdeals%2F%3Futm_source%3Dshare%26utm_medium%3Dreferral%26utm_campaign%3Dblack-friday-2026'));
   assert.ok(body.includes('No pressure, your listing stays either way.'));
   assert.ok(!/paste this anywhere/i.test(body));
   assert.equal(body.split('https://dev.express/badges/listed-on-dev-express-dark.svg').length - 1, 2);
   assert.ok(!body.includes('shields.io'));
-  assert.ok(body.includes('<a href="https://example.dev/deals/#deal-acme-cli">'));
+  assert.ok(body.includes('<a href="https://example.dev/deals/?utm_source=badge&amp;utm_medium=referral&amp;utm_campaign=black-friday-2026#deal-acme-cli">'));
   assert.ok(body.includes('linkedin.com/in/mesingh9') && body.includes('x.com/meSingh9'));
   assert.ok(!/\u2014|generated (by|with)|co-authored/i.test(body));
 });
@@ -112,7 +119,7 @@ test('share links cannot be broken out of by submitted text', () => {
   const body = comment({ verdict: 'approve', reasons: [], deal: { id: 'x', name: 'A)](https://evil.example) "q" <b>', discount: '50% off\n&url=https://evil.example', code: '', categoryName: 'AI tools' } }, ctx);
   const tweet = body.match(/twitter\.com\/intent\/tweet\?[^)\s]+/)[0];
   assert.ok(!/[()<>" ]/.test(tweet));
-  assert.equal(new URL('https://' + tweet).searchParams.get('url'), 'https://example.dev/deals/');
+  assert.equal(new URL('https://' + tweet).searchParams.get('url'), 'https://example.dev/deals/?utm_source=share&utm_medium=referral&utm_campaign=black-friday-2026');
   assert.ok(!body.includes('@undefined') && !body.includes('<b>'));
 });
 test('needs-info, hold and decline replies are specific and carry no favours', () => {

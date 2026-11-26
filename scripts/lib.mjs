@@ -447,13 +447,22 @@ const bullets = (items) => items.map((r) => `- ${r}`).join('\n');
 // encodeURIComponent leaves ! ' ( ) * alone; a stray bracket would end a Markdown link early.
 const enc = (v) => encodeURIComponent(v).replace(/[!'()*]/g, (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`);
 
-// The website is not released yet. While this is empty, replies link to the README only and
-// offer no badge. On release: set it to 'https://dev.express/black-friday/'.
-export const SITE_URL = '';
+// The website. With this empty, replies link to the README only and offer no badge.
+export const SITE_URL = 'https://dev.express/black-friday/';
+/** A link into the site that says where the visitor came from: the README or a reply (github), a badge, or a share. */
+export function inbound(url, source, fragment = '') {
+  let u;
+  try { u = new URL(url); } catch { return url; }
+  u.searchParams.set('utm_source', source);
+  u.searchParams.set('utm_medium', 'referral');
+  u.searchParams.set('utm_campaign', `black-friday-${YEAR}`);
+  u.hash = fragment;
+  return u.href;
+}
 const BADGE_IMG = 'https://dev.express/badges/listed-on-dev-express-dark.svg';
 /** The badge for a seller's own website, and the same thing for a README. */
-export const BADGE_HTML = (id = '', site = SITE_URL) => `<a href="${site}${id ? `#deal-${enc(id)}` : ''}"><img src="${BADGE_IMG}" alt="Listed on dev.express" height="54"></a>`;
-export const BADGE_MD = (id = '', site = SITE_URL) => `[![Listed on dev.express](${BADGE_IMG})](${site}${id ? `#deal-${enc(id)}` : ''})`;
+export const BADGE_HTML = (id = '', site = SITE_URL) => `<a href="${inbound(site, 'badge', id ? `deal-${id}` : '').replace(/&/g, '&amp;')}"><img src="${BADGE_IMG}" alt="Listed on dev.express" height="54"></a>`;
+export const BADGE_MD = (id = '', site = SITE_URL) => `[![Listed on dev.express](${BADGE_IMG})](${inbound(site, 'badge', id ? `deal-${id}` : '')})`;
 
 /** Share text for a listed deal. Built from cleaned, capped fields only. */
 export function shareText(deal) {
@@ -472,9 +481,9 @@ export function comment(action, { repo, site = SITE_URL, user = '' }) {
 
   if (action.verdict === 'approve') {
     const d = action.deal;
-    const home = site || repoUrl;
+    const home = site ? inbound(site, 'share') : repoUrl;
     const row = `${repoUrl}#${anchor(d.categoryName)}`;
-    const card = site ? `${site.replace(/\/$/, '')}/#deal-${enc(d.id)}` : '';
+    const card = site ? inbound(site, 'github', `deal-${d.id}`) : '';
     const text = shareText(d);
     const x = `https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(home)}`;
     const li = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(home)}`;
