@@ -19,6 +19,7 @@ const ACTIONS = process.env.REVIEW_ACTIONS || new URL('.review-actions.json', ro
 const REPO = process.env.GITHUB_REPOSITORY;
 const TOKEN = process.env.GITHUB_TOKEN;
 const LABEL = 'deal-submission';
+const OK_LABEL = 'maintainer-ok';
 const MAX_PER_RUN = 40;
 // Empty until the website is released; then set it to https://dev.express/black-friday/
 const SITE = process.env.SITE_URL || SITE_URL;
@@ -176,7 +177,9 @@ async function decide() {
   const issues = (await gh(`/repos/${REPO}/issues?state=open&per_page=100&sort=created&direction=asc`))
     .filter((i) => !i.pull_request)
     .filter(isSubmission)
-    .filter((i) => !i.labels.some((l) => l.name === 'needs-maintainer'))
+    // A held submission waits for the maintainer. Once they have opened the page themselves they add
+    // the `maintainer-ok` label, and the next run lists the deal without probing the link again.
+    .filter((i) => !i.labels.some((l) => l.name === 'needs-maintainer') || i.labels.some((l) => l.name === OK_LABEL))
     .slice(0, MAX_PER_RUN);
 
   const actions = [];
@@ -187,7 +190,8 @@ async function decide() {
     const action = { number: issue.number, verdict: result.verdict, reasons: result.reasons, name: fields.name, user: issue.user?.login ?? '' };
 
     if (result.verdict === 'approve') {
-      const link = await probe(result.deal.url);
+      const cleared = issue.labels.some((l) => l.name === OK_LABEL);
+      const link = cleared ? { state: 'ok', detail: '' } : await probe(result.deal.url);
       if (link.state === 'banned') Object.assign(action, { verdict: 'reject', reasons: [link.detail] });
       else if (link.state === 'gone') Object.assign(action, { verdict: 'needs-info', reasons: [link.detail + ' Check the address and edit the issue.'] });
       else if (link.state === 'unsure') Object.assign(action, { verdict: 'hold', reasons: [link.detail] });
