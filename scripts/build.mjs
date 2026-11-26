@@ -53,7 +53,7 @@ const site = {
   cyberMonday: CYBER_MONDAY,
   updated: now,
   categories: CATEGORIES.filter((c) => shown.some((d) => d.category === c.id)).map(({ id, name }) => ({ id, name })),
-  deals: shown.map(({ id, name, url, category, discount, code, starts, ends, description, added, own, image }) => ({ id, name, url, category, discount, code, starts, ends, description, added, ...(own ? { own: true } : {}), ...(image ? { image } : {}) })),
+  deals: shown.map(({ id, name, url, category, discount, code, starts, ends, description, added, own, image, noutm }) => ({ id, name, url, category, discount, code, starts, ends, description, added, ...(own ? { own: true } : {}), ...(image ? { image } : {}), ...(noutm ? { noutm: true } : {}) })),
 };
 writeFileSync(new URL('data/site.json', root), JSON.stringify(site, null, 1) + '\n');
 console.log(`Built README and data/site.json: ${shown.length} live or upcoming, ${deals.length - shown.length} ended.`);

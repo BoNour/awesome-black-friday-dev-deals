@@ -272,7 +272,8 @@
    "starts": "",
    "ends": "",
    "description": "Git GUI client plus GitLens for IDEs and related Git tooling",
-   "added": "2026-11-26"
+   "added": "2026-11-26",
+   "noutm": true
   },
   {
    "id": "hostinger-vps",
