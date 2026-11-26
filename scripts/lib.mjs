@@ -214,7 +214,7 @@ relation:
 `;
 /** Opens GitHub's "new file" page under deals/ with the template filled in. For someone without
  *  write access GitHub forks the repository and turns the commit into a pull request. */
-export const submitUrl = (repo) => `https://github.com/${repo}/new/main/deals?filename=your-product.yml&value=${encodeURIComponent(DEAL_TEMPLATE)}`;
+export const submitUrl = (repo) => `https://github.com/${repo}/new/main/deals?filename=your-product.yml&value=${encodeURIComponent(DEAL_TEMPLATE).replace(/[!'()*]/g, (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`)}`;
 
 function isIsoDate(s) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(s)) return false;

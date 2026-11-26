@@ -177,5 +177,7 @@ test('the add-your-deal link opens a new file under deals/ with the template fil
   assert.equal(u.pathname, '/meSingh/awesome-black-friday-dev-deals/new/main/deals');
   assert.equal(u.searchParams.get('filename'), 'your-product.yml');
   assert.equal(u.searchParams.get('value'), DEAL_TEMPLATE);
+  // a bare bracket would end the Markdown link in the README early
+  assert.ok(!/[()\s]/.test(submitUrl('meSingh/awesome-black-friday-dev-deals')));
   assert.equal(review(fieldsFromFile(parseDealFile(DEAL_TEMPLATE)), [], '2026-11-26').verdict, 'needs-info');
 });
