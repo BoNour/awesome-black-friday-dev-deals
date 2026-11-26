@@ -170,8 +170,12 @@ async function secondOpinion(deal) {
 
 async function decide() {
   const deals = JSON.parse(readFileSync(DEALS, 'utf8'));
-  const issues = (await gh(`/repos/${REPO}/issues?state=open&labels=${LABEL}&per_page=100&sort=created&direction=asc`))
+  // GitHub does not always put the form's label on an issue from someone outside the repository,
+  // so a submission is recognised by its label or by the form's own shape: the title and the headings.
+  const isSubmission = (i) => i.labels.some((l) => l.name === LABEL) || (/^deal:/i.test(i.title || '') && /^### Deal URL/m.test(i.body || ''));
+  const issues = (await gh(`/repos/${REPO}/issues?state=open&per_page=100&sort=created&direction=asc`))
     .filter((i) => !i.pull_request)
+    .filter(isSubmission)
     .filter((i) => !i.labels.some((l) => l.name === 'needs-maintainer'))
     .slice(0, MAX_PER_RUN);
 
@@ -238,7 +242,7 @@ async function notify() {
       for (const stale of Object.values(labelFor).filter((l) => l !== labelFor[a.verdict])) {
         await gh(`${base}/labels/${encodeURIComponent(stale)}`, { method: 'DELETE' }).catch(() => {});
       }
-      await gh(`${base}/labels`, { method: 'POST', body: { labels: [labelFor[a.verdict]] } });
+      await gh(`${base}/labels`, { method: 'POST', body: { labels: [LABEL, labelFor[a.verdict]] } });
       if (a.verdict === 'approve') await gh(base, { method: 'PATCH', body: { state: 'closed', state_reason: 'completed' } });
       if (a.verdict === 'reject') await gh(base, { method: 'PATCH', body: { state: 'closed', state_reason: 'not_planned' } });
     } catch (err) {

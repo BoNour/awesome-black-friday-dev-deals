@@ -17,7 +17,8 @@ concurrency:
 jobs:
   review:
     # Issue text is never interpolated into a shell. The script reads issues through the API.
-    if: github.event_name != 'issues' || contains(github.event.issue.labels.*.name, 'deal-submission')
+    # The title check covers submissions that arrive without the form's label.
+    if: github.event_name != 'issues' || contains(github.event.issue.labels.*.name, 'deal-submission') || startsWith(github.event.issue.title, 'Deal:')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
