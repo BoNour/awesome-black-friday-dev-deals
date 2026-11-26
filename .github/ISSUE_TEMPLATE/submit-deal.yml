@@ -31,15 +31,18 @@ body:
       description: Pick by what the product does.
       options:
         - AI tools
+        - AI video, image and voice
         - Developer tools
         - Hosting and cloud
         - Databases and backend
+        - Email
         - Design and UI
+        - Starter kits
+        - SEO and marketing
         - Courses and books
         - Productivity
-        - Boilerplates and starter kits
-        - Security
         - Mac and desktop apps
+        - Security
         - Other
     validations:
       required: true

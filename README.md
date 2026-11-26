@@ -38,16 +38,18 @@ If the list helps you, a star and a share help other developers find it. Your li
 ## Categories
 
 <!-- toc:start -->
-- [AI tools](#ai-tools) (18): Coding assistants, model APIs, agents, AI app builders
-- [Developer tools](#developer-tools) (11): Editors, Git, APIs, testing, debugging, monitoring
-- [Hosting and cloud](#hosting-and-cloud) (6): VPS, serverless, CDN, domains, email infrastructure
+- [AI tools](#ai-tools) (4): Coding assistants, model APIs, agents, AI app builders
+- [AI video, image and voice](#ai-video-image-and-voice) (10): Video, image and voice generation, with or without an API
+- [Developer tools](#developer-tools) (7): Editors, Git, APIs, testing, debugging, monitoring
+- [Hosting and cloud](#hosting-and-cloud) (6): VPS, serverless, CDN, domains, deployment
+- [Email](#email) (5): Sending, testing and email marketing
 - [Design and UI](#design-and-ui) (6): UI kits, components, icons, design tools
+- [Starter kits](#starter-kits) (3): Code templates that get a product shipped sooner
+- [SEO and marketing](#seo-and-marketing) (6): SEO, analytics, social and messaging tools
 - [Courses and books](#courses-and-books) (11): Courses, books and certifications for engineers
-- [Productivity](#productivity) (1): Notes, tasks, focus, writing, team tools
-- [Boilerplates and starter kits](#boilerplates-and-starter-kits) (3): Code templates that get a product shipped sooner
-- [Security](#security) (2): Scanning, secrets, pentesting, privacy
+- [Productivity](#productivity) (4): Tasks, notes, meetings, focus
 - [Mac and desktop apps](#mac-and-desktop-apps) (6): Utilities a developer keeps open all day
-- [Other](#other) (6): Useful to developers and not covered above
+- [Security](#security) (2): Scanning, secrets, sign-in, privacy
 <!-- toc:end -->
 
 <!-- deals:start -->
@@ -57,22 +59,23 @@ If the list helps you, a star and a share help other developers find it. Your li
 |---|---|---|---|---|
 | [Atlas Cloud](https://www.atlascloud.ai/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | API platform for video, image, audio and LLM models billed by credits | **Up to 20% extra credits when you top up** |  | [Get&nbsp;the&nbsp;deal](https://www.atlascloud.ai/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Base44](https://base44.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | AI app builder that generates full web apps with backend and hosting from prompts | **30% off** with code `BASE30` |  | [Get&nbsp;the&nbsp;deal](https://base44.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-| [Colossyan](https://www.colossyan.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | AI avatar video generator aimed at training and enablement content | **40% off your first year of Professional** with code `BLACKFRIDAY40` | Until&nbsp;30&nbsp;Nov | [Get&nbsp;the&nbsp;deal](https://www.colossyan.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [CometAPI](https://www.cometapi.com/campaigns/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | LLM API gateway that reaches models from many providers through one OpenAI-compatible endpoint | **Up to 28% below official API prices on selected models** | 24&nbsp;Nov&nbsp;to&nbsp;3&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://www.cometapi.com/campaigns/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [ProWritingAid](https://prowritingaid.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Grammar checker and AI writing editor for long-form text and manuscripts | **50% off Premium and Premium Pro** |  | [Get&nbsp;the&nbsp;deal](https://prowritingaid.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+
+## AI video, image and voice
+
+| Product | What it is | Deal | Dates | Link |
+|---|---|---|---|---|
+| [Colossyan](https://www.colossyan.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | AI avatar video generator aimed at training and enablement content | **40% off your first year of Professional** with code `BLACKFRIDAY40` | Until&nbsp;30&nbsp;Nov | [Get&nbsp;the&nbsp;deal](https://www.colossyan.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Creatify](https://creatify.ai/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | AI video ad generator that builds short marketing videos from a product URL | **Up to 50% off annual plans** | Until&nbsp;30&nbsp;Nov | [Get&nbsp;the&nbsp;deal](https://creatify.ai/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [ElevenLabs](https://elevenlabs.io/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Text to speech, voice cloning, speech to text and voice agent APIs with a web studio | **Up to 55% off first year of Creator or Pro annual** | Until&nbsp;1&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://elevenlabs.io/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [getimg.ai](https://getimg.ai/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | AI image and video generator with an API for developers | **40% off your first payment** |  | [Get&nbsp;the&nbsp;deal](https://getimg.ai/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [InVideo](https://invideo.io/pricing/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | AI video generator that creates videos from text prompts using several video models | **Up to 60% off** |  | [Get&nbsp;the&nbsp;deal](https://invideo.io/pricing/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Krea](https://www.krea.ai/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | AI image and video generation workspace with access to several third-party models | **Up to 75% off** |  | [Get&nbsp;the&nbsp;deal](https://www.krea.ai/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-| [Krisp](https://krisp.ai/pricing/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | AI meeting assistant with noise cancellation, transcription and meeting notes | **55% off annual plans** with code `KRISPBF2026` |  | [Get&nbsp;the&nbsp;deal](https://krisp.ai/pricing/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Magnific](https://www.magnific.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | AI image, video and audio generation suite with stock assets | **Up to 62% off and gift credits on annual plans** | Until&nbsp;1&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://www.magnific.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-| [MeetGeek](https://meetgeek.ai/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | AI meeting recorder that transcribes calls and produces summaries and action items | **30% off Pro and Business for 12 months** with code `BLACKFRIDAY2026` |  | [Get&nbsp;the&nbsp;deal](https://meetgeek.ai/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-| [Otter.ai](https://otter.ai/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | AI meeting note-taker that records, transcribes and summarises calls | **50% off Pro annual** with code `BANBF26PROA50OFF` |  | [Get&nbsp;the&nbsp;deal](https://otter.ai/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Pictory](https://pictory.ai/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | AI tool that turns scripts and articles into videos, with an API and MCP server | **50% off all plans** |  | [Get&nbsp;the&nbsp;deal](https://pictory.ai/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Pika](https://pika.art/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | AI video generation tool with a web app, API and MCP access | **60% off** |  | [Get&nbsp;the&nbsp;deal](https://pika.art/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-| [ProWritingAid](https://prowritingaid.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Grammar checker and AI writing editor for long-form text and manuscripts | **50% off Premium and Premium Pro** |  | [Get&nbsp;the&nbsp;deal](https://prowritingaid.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Synthesia](https://www.synthesia.io/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | AI video platform that creates presenter videos with avatars from a script | **Up to 50% off yearly plans** |  | [Get&nbsp;the&nbsp;deal](https://www.synthesia.io/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-| [Visibility.so](https://visibility.so/black-friday/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | SEO platform with AI agents that propose changes for search and AI answer visibility | **50% off your first month or year** with code `BLACKFRIDAY50` | Until&nbsp;30&nbsp;Nov | [Get&nbsp;the&nbsp;deal](https://visibility.so/black-friday/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 
 ## Developer tools
 
@@ -82,12 +85,8 @@ If the list helps you, a star and a share help other developers find it. Your li
 | [Akev](https://akev.dev/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Open-source tool for inspecting and modifying HTTP(S) traffic, with a one-time-purchase Pro tier | **30% off the Pro licence** with code `BLACKFRIDAY` | Until&nbsp;6&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://akev.dev/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Backpack for Laravel](https://backpackforlaravel.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Admin panel framework for Laravel applications | **50% off your first year** with code `BF50FIRSTYEAR` | Until&nbsp;1&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://backpackforlaravel.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [GitKraken](https://www.gitkraken.com/pricing) | Git GUI client plus GitLens for IDEs and related Git tooling | **60% off Pro** |  | [Get&nbsp;the&nbsp;deal](https://www.gitkraken.com/pricing) |
-| [Nuntly](https://nuntly.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Transactional email API for developers with a free tier and EU hosting | **40% off the first 12 monthly payments** with code `BLACKFRIDAY26` | Until&nbsp;31&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://nuntly.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-| [Pigeonify](https://www.pigeonify.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Email platform for marketing campaigns and transactional email with a developer API | **50% off all paid plans** with code `BLACKFRIDAY` | Until&nbsp;30&nbsp;Nov | [Get&nbsp;the&nbsp;deal](https://www.pigeonify.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Pulsetic](https://pulsetic.com/black-friday/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Uptime monitoring with status pages and incident alerts for websites and APIs | **40% off any paid plan** with code `KEEPITGREEN40` | Until&nbsp;1&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://pulsetic.com/black-friday/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-| [Sequenzy](https://www.sequenzy.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Email tool for campaigns, sequences and transactional email, with API, CLI and MCP access | **30% off any annual plan** with code `BLACKFRIDAY` |  | [Get&nbsp;the&nbsp;deal](https://www.sequenzy.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [TestDino](https://testdino.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Cloud reporting for Playwright tests with failure analysis and flaky test detection | **30% off your first year on annual plans** with code `DINOFRIDAY30` | Until&nbsp;3&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://testdino.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-| [Unspam](https://unspam.email/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Email testing for spam scores, inbox placement, device previews and DMARC monitoring | **35% off the first payment of a new plan** with code `BLACKFRIDAY35` | 16&nbsp;Nov&nbsp;to&nbsp;1&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://unspam.email/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [WPDeveloper](https://wpdeveloper.com/bfcm2026?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | WordPress plugins and templates, including Essential Addons and Templately | **Up to 75% off select plugins** |  | [Get&nbsp;the&nbsp;deal](https://wpdeveloper.com/bfcm2026?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 
 ## Hosting and cloud
@@ -101,6 +100,16 @@ If the list helps you, a star and a share help other developers find it. Your li
 | [SpinupWP](https://spinupwp.com/pricing/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Server control panel for running WordPress sites on your own cloud servers | **50% off your first 6 months** | Until&nbsp;30&nbsp;Nov | [Get&nbsp;the&nbsp;deal](https://spinupwp.com/pricing/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [xCloud](https://xcloud.host/deal?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Server control panel and managed cloud VPS hosting for WordPress and web apps | **Up to 77% off lifetime panel, up to 65% off Cloud VPS** | Until&nbsp;4&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://xcloud.host/deal?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 
+## Email
+
+| Product | What it is | Deal | Dates | Link |
+|---|---|---|---|---|
+| [MailerLite](https://www.mailerlite.com/black-friday-deal?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Email marketing platform with automation, landing pages and an API | **26% off an annual plan** with code `LITEFRIDAY26` | 17&nbsp;Nov&nbsp;to&nbsp;18&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://www.mailerlite.com/black-friday-deal?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [Nuntly](https://nuntly.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Transactional email API for developers with a free tier and EU hosting | **40% off the first 12 monthly payments** with code `BLACKFRIDAY26` | Until&nbsp;31&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://nuntly.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [Pigeonify](https://www.pigeonify.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Email platform for marketing campaigns and transactional email with a developer API | **50% off all paid plans** with code `BLACKFRIDAY` | Until&nbsp;30&nbsp;Nov | [Get&nbsp;the&nbsp;deal](https://www.pigeonify.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [Sequenzy](https://www.sequenzy.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Email tool for campaigns, sequences and transactional email, with API, CLI and MCP access | **30% off any annual plan** with code `BLACKFRIDAY` |  | [Get&nbsp;the&nbsp;deal](https://www.sequenzy.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [Unspam](https://unspam.email/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Email testing for spam scores, inbox placement, device previews and DMARC monitoring | **35% off the first payment of a new plan** with code `BLACKFRIDAY35` | 16&nbsp;Nov&nbsp;to&nbsp;1&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://unspam.email/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+
 ## Design and UI
 
 | Product | What it is | Deal | Dates | Link |
@@ -111,6 +120,25 @@ If the list helps you, a star and a share help other developers find it. Your li
 | [Shadcnblocks](https://www.shadcnblocks.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Library of shadcn/ui blocks, components, templates and an admin kit | **40% off everything** |  | [Get&nbsp;the&nbsp;deal](https://www.shadcnblocks.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [ShadcnSpace](https://shadcnspace.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | shadcn/ui components, blocks and templates | **40% off** with code `BFCM` |  | [Get&nbsp;the&nbsp;deal](https://shadcnspace.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Siter.io](https://siter.io/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | No-code website builder for designing and publishing sites on your own domain | **40% off your first payment** with code `BLACKFRIDAY40` | 16&nbsp;Nov&nbsp;to&nbsp;3&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://siter.io/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+
+## Starter kits
+
+| Product | What it is | Deal | Dates | Link |
+|---|---|---|---|---|
+| [Frontkit](https://thefrontkit.com/templates?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Next.js business app templates and UI kits with full source code | **Up to 70% off kits** |  | [Get&nbsp;the&nbsp;deal](https://thefrontkit.com/templates?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [SaaSykit](https://saasykit.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Laravel SaaS starter kit with subscriptions, admin panel and optional multi-tenancy | **50% off all plans** |  | [Get&nbsp;the&nbsp;deal](https://saasykit.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [TurboStarter](https://www.turbostarter.dev/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | SaaS starter kit covering web app, mobile app and browser extension | **$150 off** |  | [Get&nbsp;the&nbsp;deal](https://www.turbostarter.dev/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+
+## SEO and marketing
+
+| Product | What it is | Deal | Dates | Link |
+|---|---|---|---|---|
+| [Hypefury](https://hypefury.com/features-pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Scheduling and automation tool for posting to X, LinkedIn and other social platforms | **40% off Creator or Pro for 2 months** with code `BLACKFRIDAY40` | Until&nbsp;30&nbsp;Nov | [Get&nbsp;the&nbsp;deal](https://hypefury.com/features-pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [Pirsch Analytics](https://pirsch.io/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Cookie-free web analytics service with an API, hosted in the EU | **20% off the first monthly or annual payment** with code `BLACKFRIDAY26` | Until&nbsp;31&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://pirsch.io/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [SE Ranking](https://seranking.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | SEO platform for rank tracking, site audits, keyword research and AI search visibility | **Extra 20% off annual plans and add-ons** | Until&nbsp;4&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://seranking.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [Seobility](https://www.seobility.net/en/lp/blackfriday26/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | SEO tool for site audits, rank tracking and backlink monitoring | **60 days of Premium free, then 15% off** with code `blackfriday26ext` | 17&nbsp;Nov&nbsp;to&nbsp;6&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://www.seobility.net/en/lp/blackfriday26/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [Visibility.so](https://visibility.so/black-friday/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | SEO platform with AI agents that propose changes for search and AI answer visibility | **50% off your first month or year** with code `BLACKFRIDAY50` | Until&nbsp;30&nbsp;Nov | [Get&nbsp;the&nbsp;deal](https://visibility.so/black-friday/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [Wassenger](https://www.wassenger.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | WhatsApp Business platform with a shared team inbox, CRM and API access | **40% off the first 6 months of any monthly plan** with code `BLACKFRIDAY40` | Until&nbsp;1&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://www.wassenger.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 
 ## Courses and books
 
@@ -132,22 +160,10 @@ If the list helps you, a star and a share help other developers find it. Your li
 
 | Product | What it is | Deal | Dates | Link |
 |---|---|---|---|---|
+| [Krisp](https://krisp.ai/pricing/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | AI meeting assistant with noise cancellation, transcription and meeting notes | **55% off annual plans** with code `KRISPBF2026` |  | [Get&nbsp;the&nbsp;deal](https://krisp.ai/pricing/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [MeetGeek](https://meetgeek.ai/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | AI meeting recorder that transcribes calls and produces summaries and action items | **30% off Pro and Business for 12 months** with code `BLACKFRIDAY2026` |  | [Get&nbsp;the&nbsp;deal](https://meetgeek.ai/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [Otter.ai](https://otter.ai/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | AI meeting note-taker that records, transcribes and summarises calls | **50% off Pro annual** with code `BANBF26PROA50OFF` |  | [Get&nbsp;the&nbsp;deal](https://otter.ai/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Things](https://culturedcode.com/things/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Personal task manager for Mac, iPhone and iPad | **30% off** | 23&nbsp;Nov&nbsp;to&nbsp;30&nbsp;Nov | [Get&nbsp;the&nbsp;deal](https://culturedcode.com/things/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-
-## Boilerplates and starter kits
-
-| Product | What it is | Deal | Dates | Link |
-|---|---|---|---|---|
-| [Frontkit](https://thefrontkit.com/templates?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Next.js business app templates and UI kits with full source code | **Up to 70% off kits** |  | [Get&nbsp;the&nbsp;deal](https://thefrontkit.com/templates?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-| [SaaSykit](https://saasykit.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Laravel SaaS starter kit with subscriptions, admin panel and optional multi-tenancy | **50% off all plans** |  | [Get&nbsp;the&nbsp;deal](https://saasykit.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-| [TurboStarter](https://www.turbostarter.dev/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | SaaS starter kit covering web app, mobile app and browser extension | **$150 off** |  | [Get&nbsp;the&nbsp;deal](https://www.turbostarter.dev/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-
-## Security
-
-| Product | What it is | Deal | Dates | Link |
-|---|---|---|---|---|
-| [OffSeq Breach](https://breach.offseq.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Monitors leak datasets and forums for credentials tied to your domains and sends alerts | **50% off all plans** |  | [Get&nbsp;the&nbsp;deal](https://breach.offseq.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-| [SSOJet](https://ssojet.com/blog/black-friday-deals?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Enterprise SSO, SCIM and directory sync API for B2B SaaS apps | **20% off** with code `BF2026` | Until&nbsp;15&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://ssojet.com/blog/black-friday-deals?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 
 ## Mac and desktop apps
 
@@ -160,16 +176,12 @@ If the list helps you, a star and a share help other developers find it. Your li
 | [TablePlus](https://tableplus.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Native database GUI client for relational and NoSQL databases | **25% off** with code `BLACK_FRIDAY_2026` |  | [Get&nbsp;the&nbsp;deal](https://tableplus.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Tower](https://www.git-tower.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Git client for Mac and Windows | **Up to 50% off Tower Pro and Basic, first year** | Until&nbsp;6&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://www.git-tower.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 
-## Other
+## Security
 
 | Product | What it is | Deal | Dates | Link |
 |---|---|---|---|---|
-| [Hypefury](https://hypefury.com/features-pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Scheduling and automation tool for posting to X, LinkedIn and other social platforms | **40% off Creator or Pro for 2 months** with code `BLACKFRIDAY40` | Until&nbsp;30&nbsp;Nov | [Get&nbsp;the&nbsp;deal](https://hypefury.com/features-pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-| [MailerLite](https://www.mailerlite.com/black-friday-deal?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Email marketing platform with automation, landing pages and an API | **26% off an annual plan** with code `LITEFRIDAY26` | 17&nbsp;Nov&nbsp;to&nbsp;18&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://www.mailerlite.com/black-friday-deal?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-| [Pirsch Analytics](https://pirsch.io/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Cookie-free web analytics service with an API, hosted in the EU | **20% off the first monthly or annual payment** with code `BLACKFRIDAY26` | Until&nbsp;31&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://pirsch.io/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-| [SE Ranking](https://seranking.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | SEO platform for rank tracking, site audits, keyword research and AI search visibility | **Extra 20% off annual plans and add-ons** | Until&nbsp;4&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://seranking.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-| [Seobility](https://www.seobility.net/en/lp/blackfriday26/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | SEO tool for site audits, rank tracking and backlink monitoring | **60 days of Premium free, then 15% off** with code `blackfriday26ext` | 17&nbsp;Nov&nbsp;to&nbsp;6&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://www.seobility.net/en/lp/blackfriday26/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
-| [Wassenger](https://www.wassenger.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | WhatsApp Business platform with a shared team inbox, CRM and API access | **40% off the first 6 months of any monthly plan** with code `BLACKFRIDAY40` | Until&nbsp;1&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://www.wassenger.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [OffSeq Breach](https://breach.offseq.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Monitors leak datasets and forums for credentials tied to your domains and sends alerts | **50% off all plans** |  | [Get&nbsp;the&nbsp;deal](https://breach.offseq.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [SSOJet](https://ssojet.com/blog/black-friday-deals?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Enterprise SSO, SCIM and directory sync API for B2B SaaS apps | **20% off** with code `BF2026` | Until&nbsp;15&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://ssojet.com/blog/black-friday-deals?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 <!-- deals:end -->
 
 ---

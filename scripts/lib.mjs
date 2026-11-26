@@ -12,15 +12,18 @@ export const MAX_DEAL_DAYS = 60;
 
 export const CATEGORIES = [
   { id: 'ai', name: 'AI tools', blurb: 'Coding assistants, model APIs, agents, AI app builders' },
+  { id: 'media', name: 'AI video, image and voice', blurb: 'Video, image and voice generation, with or without an API' },
   { id: 'dev', name: 'Developer tools', blurb: 'Editors, Git, APIs, testing, debugging, monitoring' },
-  { id: 'hosting', name: 'Hosting and cloud', blurb: 'VPS, serverless, CDN, domains, email infrastructure' },
+  { id: 'hosting', name: 'Hosting and cloud', blurb: 'VPS, serverless, CDN, domains, deployment' },
   { id: 'data', name: 'Databases and backend', blurb: 'Databases, auth, queues, search, backend services' },
+  { id: 'email', name: 'Email', blurb: 'Sending, testing and email marketing' },
   { id: 'design', name: 'Design and UI', blurb: 'UI kits, components, icons, design tools' },
+  { id: 'starter', name: 'Starter kits', blurb: 'Code templates that get a product shipped sooner' },
+  { id: 'marketing', name: 'SEO and marketing', blurb: 'SEO, analytics, social and messaging tools' },
   { id: 'learn', name: 'Courses and books', blurb: 'Courses, books and certifications for engineers' },
-  { id: 'productivity', name: 'Productivity', blurb: 'Notes, tasks, focus, writing, team tools' },
-  { id: 'starter', name: 'Boilerplates and starter kits', blurb: 'Code templates that get a product shipped sooner' },
-  { id: 'security', name: 'Security', blurb: 'Scanning, secrets, pentesting, privacy' },
+  { id: 'productivity', name: 'Productivity', blurb: 'Tasks, notes, meetings, focus' },
   { id: 'desktop', name: 'Mac and desktop apps', blurb: 'Utilities a developer keeps open all day' },
+  { id: 'security', name: 'Security', blurb: 'Scanning, secrets, sign-in, privacy' },
   { id: 'other', name: 'Other', blurb: 'Useful to developers and not covered above' },
 ];
 
