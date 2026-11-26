@@ -129,6 +129,12 @@ test('an image link is optional, and a given one must be a public https link', (
   assert.equal(run({ 'Image link': 'https://169.254.169.254/x.png' }).verdict, 'needs-info');
   assert.equal(run({ 'Image link': 'javascript:alert(1)' }).verdict, 'needs-info');
 });
+test('a logo link is optional, and a given one must be a public https link', () => {
+  assert.equal(run().deal.logo, '');
+  assert.equal(run({ 'Logo link': 'https://acme.dev/icon.png?utm_source=x' }).deal.logo, 'https://acme.dev/icon.png');
+  assert.equal(run({ 'Logo link': 'http://acme.dev/icon.png' }).verdict, 'needs-info');
+  assert.equal(run({ 'Logo link': 'https://10.0.0.1/icon.png' }).verdict, 'needs-info');
+});
 test('an image is judged by its bytes, not its name', () => {
   assert.equal(sniffImage(Uint8Array.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a])), 'png');
   assert.equal(sniffImage(Uint8Array.from([0xff, 0xd8, 0xff, 0xe0])), 'jpg');

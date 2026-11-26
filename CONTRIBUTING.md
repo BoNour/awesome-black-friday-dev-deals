@@ -13,6 +13,7 @@ A deal is listed when all of these hold:
 - **The dates are real.** Start and end in `YYYY-MM-DD`. The deal has not ended, it is running at some point in the Black Friday sale weeks, and it lasts no longer than 60 days. Deals that started early or run on into December are welcome.
 - **The discount is specific.** "40% off annual plans" or "$50 off", in 60 characters or fewer. A percentage must be between 1 and 100.
 - **The description is plain.** One sentence on what the product is, 160 characters or fewer, no sales copy.
+- **A logo helps, and is optional.** A link to your product's logo or app icon: square, at least 128 pixels wide, png, jpg or webp. If you leave it empty, the icon your site declares is used.
 - **The image is yours, and optional.** A link to your own banner or social image: png, jpg or webp, up to 5 MB. If you leave it empty, the social image from your page is used. It will sit next to your deal on the dev.express site when that opens. The site keeps its own copy, so your server is not hit on every visit.
 - **It is not already listed.**
 

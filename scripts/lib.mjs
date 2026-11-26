@@ -111,6 +111,7 @@ export function fieldsFromForm(form) {
     description: clean(get('what is it'), 220),
     relation: clean(get('your relation to the product'), 80),
     image: (get('image link').split(/\s+/)[0] ?? '').trim(),
+    logo: (get('logo link').split(/\s+/)[0] ?? '').trim(),
   };
 }
 
@@ -262,6 +263,14 @@ export function review(fields, existing = [], now = today()) {
     else image = pic.url;
   }
 
+  // The logo is optional too, and held to the same rule.
+  let logo = '';
+  if (f.logo) {
+    const pic = checkUrl(f.logo);
+    if (pic.rejected || !pic.ok) reasons.push('The logo link must be a public https link to a png, jpg or webp image. Fix it, or leave the field empty and we will use the icon from your site.');
+    else logo = pic.url;
+  }
+
   if (reasons.length) return { verdict: 'needs-info', reasons };
 
   return {
@@ -279,6 +288,7 @@ export function review(fields, existing = [], now = today()) {
       description: f.description.replace(/[.\s]+$/, ''),
       relation: f.relation,
       image,
+      logo,
     },
   };
 }

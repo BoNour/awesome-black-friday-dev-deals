@@ -119,6 +119,30 @@ export async function pageImage(pageUrl) {
   return '';
 }
 
+/** The icon a site declares for itself: its touch icon first, then any icon it marks as 96 px or larger. */
+export async function pageIcon(pageUrl) {
+  const got = await fetchCapped(pageUrl, 1024 * 1024, 'text/html');
+  if (!got?.bytes) return '';
+  const html = got.bytes.toString('utf8');
+  const found = [];
+  for (const tag of html.match(/<link\b[^>]*>/gi) ?? []) {
+    const rel = (tag.match(/rel=["']([^"']+)["']/i)?.[1] ?? '').toLowerCase();
+    const href = tag.match(/href=["']([^"']+)["']/i)?.[1];
+    if (!href) continue;
+    const size = Number(tag.match(/sizes=["'](\d+)x\d+["']/i)?.[1] ?? 0);
+    if (rel.includes('apple-touch-icon')) found.push({ href, rank: 1000 + size });
+    else if (/(^|\s)icon(\s|$)/.test(rel) && size >= 96) found.push({ href, rank: size });
+  }
+  found.sort((a, b) => b.rank - a.rank);
+  for (const { href } of found.slice(0, 3)) {
+    let src;
+    try { src = new URL(href.replace(/&amp;/g, '&'), got.url).href; } catch { continue; }
+    const pic = await probeImage(src);
+    if (pic.ok) return checkUrl(src).url ?? '';
+  }
+  return '';
+}
+
 /** Optional second opinion. Runs only when ANTHROPIC_API_KEY is set; it can hold a deal, never approve one. */
 async function secondOpinion(deal) {
   const key = process.env.ANTHROPIC_API_KEY;
@@ -171,6 +195,14 @@ async function decide() {
           if (!pic.ok) Object.assign(action, { verdict: 'needs-info', reasons: [`${pic.why} Fix the link, or clear the field and we will use the image from your page.`] });
         } else {
           result.deal.image = await pageImage(result.deal.url);
+        }
+        if (action.verdict === 'approve') {
+          if (result.deal.logo) {
+            const pic = await probeImage(result.deal.logo);
+            if (!pic.ok) Object.assign(action, { verdict: 'needs-info', reasons: [`The logo: ${pic.why.replace('The image', 'the')} Fix the link, or clear the field and we will use the icon from your site.`] });
+          } else {
+            result.deal.logo = await pageIcon(result.deal.url);
+          }
         }
       }
     }

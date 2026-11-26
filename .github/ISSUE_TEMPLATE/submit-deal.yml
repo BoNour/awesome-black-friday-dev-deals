@@ -90,6 +90,12 @@ body:
       label: Image link
       description: Optional. A link to your own banner or social image (png, jpg or webp, up to 5 MB, starting with https://). It will be shown next to your deal on the dev.express site when that opens. Leave it empty and we will use the social image from your page.
       placeholder: https://acme.dev/og/black-friday.png
+  - type: input
+    id: logo
+    attributes:
+      label: Logo link
+      description: Optional. A link to your product's logo or app icon, square, at least 128 pixels wide (png, jpg or webp, starting with https://). Leave it empty and we will use the icon your site already declares.
+      placeholder: https://acme.dev/icon.png
   - type: dropdown
     id: relation
     attributes:
