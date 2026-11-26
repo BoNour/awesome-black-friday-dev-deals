@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: 22
       - name: Check the rules still pass
-        run: node --test test/
+        run: node --test test/*.test.mjs
       - name: Review open submissions
         env:
           GITHUB_TOKEN: ${{ github.token }}
