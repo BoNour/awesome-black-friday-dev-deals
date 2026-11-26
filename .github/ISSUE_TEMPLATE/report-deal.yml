@@ -1,0 +1,17 @@
+name: Report a problem with a listed deal
+description: A deal has expired, changed or looks wrong.
+title: "Report: "
+labels: ["report"]
+body:
+  - type: input
+    id: deal
+    attributes:
+      label: Which deal
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong
+    validations:
+      required: true

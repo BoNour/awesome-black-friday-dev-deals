@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=JetBrains+Mono:wght@500;700;800&display=block');
+:root{--ink:#221a16;--cream:#fbf3e6;--paper:#fffdf8;--tang:#ff7a1a;--pink:#ff4f93;--butter:#ffd166;--cobalt:#2f5bff;--peach:#ffc9ae;--espresso:#1e1613}
+*{box-sizing:border-box}html,body{margin:0}
+.b{width:1280px;height:400px;position:relative;overflow:hidden;font-family:'Bricolage Grotesque',system-ui,sans-serif;color:var(--ink)}
+.mono{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace}
+.c{position:absolute;font-family:'JetBrains Mono',monospace;font-weight:800;line-height:1}
+.sq{position:absolute;width:14px;height:14px;border-radius:3px}
+.dot{position:absolute;width:12px;height:12px;border-radius:50%}
+.tag{position:absolute;padding:10px 16px 10px 30px;border-radius:10px;font:800 22px/1 'JetBrains Mono',monospace;border:3px solid var(--ink)}
+.tag::before{content:"";position:absolute;left:10px;top:50%;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:var(--ink)}

@@ -1,0 +1,10 @@
+{
+  "name": "awesome-black-friday-dev-deals",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test test/"
+  },
+  "engines": { "node": ">=20" }
+}

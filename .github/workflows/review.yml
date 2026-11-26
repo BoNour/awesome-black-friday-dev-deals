@@ -1,0 +1,59 @@
+name: Review submissions
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+# Nothing by default; each job asks for what it needs.
+permissions: {}
+
+concurrency:
+  group: review
+  cancel-in-progress: false
+
+jobs:
+  review:
+    # Issue text is never interpolated into a shell. The script reads issues through the API.
+    if: github.event_name != 'issues' || contains(github.event.issue.labels.*.name, 'deal-submission')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - name: Check the rules still pass
+        run: node --test test/
+      - name: Review open submissions
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          REVIEW_ACTIONS: ${{ runner.temp }}/review-actions.json
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/review.mjs decide
+      - name: Rebuild the README and the data the website reads
+        run: node scripts/build.mjs
+      - name: Commit
+        id: commit
+        run: |
+          if git diff --quiet -- data/deals.json data/site.json README.md; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/deals.json data/site.json README.md
+          git commit -m "Update deals from reviewed submissions"
+          git push
+      - name: Reply to submitters
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          REVIEW_ACTIONS: ${{ runner.temp }}/review-actions.json
+        run: node scripts/review.mjs notify
+
