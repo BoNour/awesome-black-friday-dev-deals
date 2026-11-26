@@ -8,7 +8,7 @@ Black Friday 2026 deals on AI and developer tools.
 Grab a code, save some money, get back to building.
 
 <!-- stats:start -->
-**70 deals and counting** · last updated 26 Nov 2026
+**71 deals and counting** · last updated 26 Nov 2026
 <!-- stats:end -->
 
 **[Submit a deal](https://github.com/meSingh/awesome-black-friday-dev-deals/issues/new?template=submit-deal.yml)** · **[Star the list](https://github.com/meSingh/awesome-black-friday-dev-deals)**
@@ -45,7 +45,7 @@ If the list helps you, a star and a share help other developers find it. Your li
 - [Email](#email) (5): Sending, testing and email marketing
 - [Design and UI](#design-and-ui) (6): UI kits, components, icons, design tools
 - [Starter kits](#starter-kits) (3): Code templates that get a product shipped sooner
-- [SEO and marketing](#seo-and-marketing) (6): SEO, analytics, social and messaging tools
+- [SEO and marketing](#seo-and-marketing) (7): SEO, analytics, social and messaging tools
 - [Courses and books](#courses-and-books) (11): Courses, books and certifications for engineers
 - [Productivity](#productivity) (4): Tasks, notes, meetings, focus
 - [Mac and desktop apps](#mac-and-desktop-apps) (6): Utilities a developer keeps open all day
@@ -137,6 +137,7 @@ If the list helps you, a star and a share help other developers find it. Your li
 | [Pirsch Analytics](https://pirsch.io/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Cookie-free web analytics service with an API, hosted in the EU | **20% off the first monthly or annual payment** with code `BLACKFRIDAY26` | Until&nbsp;31&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://pirsch.io/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [SE Ranking](https://seranking.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | SEO platform for rank tracking, site audits, keyword research and AI search visibility | **Extra 20% off annual plans and add-ons** | Until&nbsp;4&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://seranking.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Seobility](https://www.seobility.net/en/lp/blackfriday26/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | SEO tool for site audits, rank tracking and backlink monitoring | **60 days of Premium free, then 15% off** with code `blackfriday26ext` | 17&nbsp;Nov&nbsp;to&nbsp;6&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://www.seobility.net/en/lp/blackfriday26/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [Startup Buffer](https://startupbuffer.com/promote?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | A startup directory with 33,000+ listings, where homepage features put a product in front of people browsing new startups | **50% off homepage features** | 26&nbsp;Nov&nbsp;to&nbsp;4&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://startupbuffer.com/promote?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Visibility.so](https://visibility.so/black-friday/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | SEO platform with AI agents that propose changes for search and AI answer visibility | **50% off your first month or year** with code `BLACKFRIDAY50` | Until&nbsp;30&nbsp;Nov | [Get&nbsp;the&nbsp;deal](https://visibility.so/black-friday/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Wassenger](https://www.wassenger.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | WhatsApp Business platform with a shared team inbox, CRM and API access | **40% off the first 6 months of any monthly plan** with code `BLACKFRIDAY40` | Until&nbsp;1&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://www.wassenger.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 

@@ -980,5 +980,22 @@
     "added": "2026-11-26",
     "source": "seed",
     "checked": "2026-11-26"
+  },
+  {
+    "id": "startup-buffer",
+    "name": "Startup Buffer",
+    "url": "https://startupbuffer.com/promote",
+    "category": "marketing",
+    "discount": "50% off homepage features",
+    "code": "",
+    "starts": "2026-11-26",
+    "ends": "2026-12-04",
+    "description": "A startup directory with 33,000+ listings, where homepage features put a product in front of people browsing new startups",
+    "relation": "I built it or work on it",
+    "image": "",
+    "logo": "",
+    "added": "2026-11-26",
+    "source": "#2",
+    "submitter": "makyol"
   }
 ]
