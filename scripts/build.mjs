@@ -55,7 +55,8 @@ const site = {
   blackFriday: BLACK_FRIDAY,
   cyberMonday: CYBER_MONDAY,
   updated: now,
-  submit: submitUrl(REPO),
+  submit: `https://github.com/${REPO}/issues/new?template=submit-deal.yml`,
+  submitPr: submitUrl(REPO),
   categories: CATEGORIES.filter((c) => shown.some((d) => d.category === c.id)).map(({ id, name }) => ({ id, name })),
   deals: shown.map(({ id, name, url, category, discount, code, starts, ends, description, added, own, image, logo, noutm }) => ({ id, name, url, category, discount, code, starts, ends, description, added, ...(own ? { own: true } : {}), ...(image ? { image } : {}), ...(logo ? { logo } : {}), ...(noutm ? { noutm: true } : {}) })),
 };

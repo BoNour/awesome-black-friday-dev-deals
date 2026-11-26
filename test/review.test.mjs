@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseDealFile, fieldsFromFile, dealFromFile, serializeDeal, DEAL_FILE, DEAL_TEMPLATE, submitUrl, review, checkUrl, clean, md, checkDiscount, comment, sniffImage, utm } from '../scripts/lib.mjs';
+import { parseIssueForm, fieldsFromForm, isFormSubmission, parseDealFile, fieldsFromFile, dealFromFile, serializeDeal, DEAL_FILE, DEAL_TEMPLATE, submitUrl, review, checkUrl, clean, md, checkDiscount, comment, sniffImage, utm } from '../scripts/lib.mjs';
 
 // The tests describe a submission by the old form headings; this writes it as a deal file.
 const KEY = { 'Product name': 'name', 'Deal URL': 'url', Category: 'category', Discount: 'discount', 'Coupon code': 'code', 'Start date': 'starts', 'End date': 'ends', 'What is it': 'description', 'Your relation to the product': 'relation', 'Image link': 'image', 'Logo link': 'logo' };
@@ -187,4 +187,26 @@ test('the add-your-deal link opens a new file under deals/ with the template fil
   // a bare bracket would end the Markdown link in the README early
   assert.ok(!/[()\s]/.test(submitUrl('meSingh/awesome-black-friday-dev-deals')));
   assert.equal(review(fieldsFromFile(parseDealFile(DEAL_TEMPLATE)), [], '2026-11-26').verdict, 'needs-info');
+});
+
+test('the form gives the same answer as the file', () => {
+  const form = ['### Product name', '', 'Acme CLI', '', '### Deal URL', '', 'https://acme.dev/black-friday?ref=bob', '', '### Category', '', 'Developer tools', '', '### Discount', '', '40% off annual plans', '', '### Coupon code', '', '_No response_', '', '### Start date', '', '2026-11-27', '', '### End date', '', '2026-11-30', '', '### What is it', '', 'A command line tool that deploys containers to your own servers', '', '### Image link', '', '_No response_', '', '### Logo link', '', '_No response_', '', '### Your relation to the product', '', 'I built it or work on it'].join('\n');
+  const viaForm = review(fieldsFromForm(parseIssueForm(form)), [], '2026-11-26');
+  const viaFile = run({ 'Coupon code': '' });
+  assert.equal(viaForm.verdict, 'approve');
+  assert.deepEqual(viaForm.deal, viaFile.deal);
+});
+test('a form submission is recognised by its label or by its shape', () => {
+  assert.ok(isFormSubmission({ title: 'anything', body: '', labels: [{ name: 'deal-submission' }] }));
+  assert.ok(isFormSubmission({ title: 'Deal: Acme', body: '### Product name\n\nAcme\n\n### Deal URL\n\nhttps://acme.dev', labels: [] }));
+  assert.ok(!isFormSubmission({ title: 'Report: a dead link', body: '### Deal URL\n\nx', labels: [{ name: 'report' }] }));
+  assert.ok(!isFormSubmission({ title: 'Deal: Acme', body: 'no form here', labels: [] }));
+});
+test('each route gets the reply that fits it', () => {
+  const deal = { id: 'acme-cli', name: 'Acme CLI', discount: '40% off', code: '', categoryName: 'Developer tools' };
+  const c = { repo: 'meSingh/awesome-black-friday-dev-deals', user: 'octo-cat' };
+  assert.ok(comment({ kind: 'pr', verdict: 'approve', reasons: [], deal }, c).includes('makes you a contributor'));
+  assert.ok(!comment({ kind: 'issue', verdict: 'approve', reasons: [], deal }, c).includes('pull request'));
+  assert.ok(comment({ kind: 'pr', verdict: 'needs-info', reasons: ['x'] }, c).includes('Files changed'));
+  assert.ok(comment({ kind: 'issue', verdict: 'needs-info', reasons: ['x'] }, c).includes('edit this issue'));
 });

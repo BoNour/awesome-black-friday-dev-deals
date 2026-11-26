@@ -1,7 +1,9 @@
 name: Review submissions
 
-# A submission is a pull request that adds one file under deals/.
+# A submission is a pull request that adds one file under deals/, or the "Submit a deal" issue form.
 on:
+  issues:
+    types: [opened, edited, reopened, labeled]
   # pull_request_target runs this workflow from main, with a token that can write, for pull
   # requests from forks. That is safe here only because nothing from the pull request is ever
   # checked out or executed: the job checks out main, and reads the submitted file as text
@@ -21,6 +23,8 @@ concurrency:
 
 jobs:
   review:
+    # Issues that are not submissions (a report of a bad deal, say) do not need a run.
+    if: github.event_name != 'issues' || contains(github.event.issue.labels.*.name, 'deal-submission') || startsWith(github.event.issue.title, 'Deal:')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:

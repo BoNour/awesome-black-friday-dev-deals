@@ -2,7 +2,10 @@
 
 ## Adding a deal
 
-Each deal is one file in [`deals/`](deals), named after the product: `deals/acme-cli.yml`. You add yours as a pull request.
+Each deal is one file in [`deals/`](deals), named after the product: `deals/acme-cli.yml`. There are two ways to add yours:
+
+- **A pull request** that adds the file. This is the recommended way: you are listed as a contributor once it is merged.
+- **The [Submit a deal](https://github.com/meSingh/awesome-black-friday-dev-deals/issues/new?template=submit-deal.yml) form.** You fill in the same details and the file is written for you.
 
 The quick way: use the **[Add your deal](README.md#add-your-deal)** link in the README. GitHub opens a new file with the lines already laid out. Rename it, fill it in, click **Commit changes**, then **Create pull request**. If you do not have write access, GitHub forks the list for you first.
 
@@ -42,14 +45,14 @@ A deal is listed when all of these hold:
 
 Never listed: general retail (clothing, watches, beauty, household goods), gambling, adult content, crypto and get-rich schemes. The list is for software and tools that developers, founders and AI builders use.
 
-## What the reply on your pull request means
+## What the reply means
 
 | Reply | Meaning | What to do |
 |---|---|---|
-| "is live" | Your pull request is merged and the deal is in the README and on dev.express | Nothing. A star or a share is welcome; your listing stays either way |
-| "nearly there" | A line is missing or malformed | Edit your file in the pull request (Files changed, the three dots, Edit file); it gets looked at again by itself |
-| "nearly in" | Everything looks right, but the link would not open automatically | Nothing; the maintainer opens the page and merges it |
-| "not one for this list" | The deal breaks a rule | Reply on the pull request if you think we got it wrong |
+| "is live" | The deal is in the README and on dev.express. A pull request is merged; a form issue is closed | Nothing. A star or a share is welcome; your listing stays either way |
+| "nearly there" | A line is missing or malformed | Edit your file in the pull request (Files changed, the three dots, Edit file), or edit your issue if you used the form; it gets looked at again by itself |
+| "nearly in" | Everything looks right, but the link would not open automatically | Nothing; the maintainer opens the page and lists it |
+| "not one for this list" | The deal breaks a rule | Reply there if you think we got it wrong |
 
 ## Changing a deal that is already listed
 

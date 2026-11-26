@@ -188,6 +188,46 @@ export function serializeDeal(deal) {
   return lines.map((l) => l.trimEnd()).join('\n') + '\n';
 }
 
+// ---------------------------------------------------------------------------
+// The other way in: the "Submit a deal" issue form, for people who would rather not touch a file.
+
+/** Parse the body GitHub writes for an Issue Form into { heading: value }. */
+export function parseIssueForm(body) {
+  const out = {};
+  const text = String(body ?? '').replace(/\r\n?/g, '\n');
+  const parts = text.split(/^### +(.+?) *$/m);
+  for (let i = 1; i < parts.length; i += 2) {
+    const key = parts[i].trim().toLowerCase();
+    let value = (parts[i + 1] ?? '').trim();
+    if (/^_no response_$/i.test(value) || /^none$/i.test(value)) value = '';
+    out[key] = value;
+  }
+  return out;
+}
+
+/** Map form headings to the fields of a deal. */
+export function fieldsFromForm(form) {
+  const get = (name) => form[name] ?? '';
+  return {
+    name: clean(get('product name'), 80),
+    url: get('deal url').split(/\s+/)[0] ?? '',
+    category: clean(get('category'), 60),
+    discount: clean(get('discount'), 80),
+    code: clean(get('coupon code'), 60),
+    starts: clean(get('start date'), 20),
+    ends: clean(get('end date'), 20),
+    description: clean(get('what is it'), 220),
+    relation: clean(get('your relation to the product'), 80),
+    image: (get('image link').split(/\s+/)[0] ?? '').trim(),
+    logo: (get('logo link').split(/\s+/)[0] ?? '').trim(),
+  };
+}
+
+/** Is this issue a deal submission? GitHub does not always put the form's label on an issue from
+ *  someone outside the repository, so the form's own shape counts too: the title and the headings. */
+export const isFormSubmission = (issue, label = 'deal-submission') =>
+  (issue.labels ?? []).some((l) => (l.name ?? l) === label) || (/^deal:/i.test(issue.title || '') && /^### Deal URL/m.test(issue.body || ''));
+
 /** What the "Add your deal" link opens in GitHub's editor. */
 export const DEAL_TEMPLATE = `# Add your Black Friday deal. It is free.
 #
@@ -474,8 +514,10 @@ export function shareText(deal) {
 /**
  * @param {{verdict:string, reasons:string[], deal?:object}} action
  * @param {{repo:string, site?:string, user?:string}} ctx
+ * `action.kind` is 'pr' for a pull request and 'issue' for the form.
  */
 export function comment(action, { repo, site = SITE_URL, user = '' }) {
+  const viaPr = action.kind === 'pr';
   const repoUrl = `https://github.com/${repo}`;
   const hi = login(user);
 
@@ -488,7 +530,7 @@ export function comment(action, { repo, site = SITE_URL, user = '' }) {
     const x = `https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(home)}`;
     const li = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(home)}`;
     return [
-      `${hi}**${md(d.name)} is live.** 🎉 Your pull request is merged, which also makes you a contributor to the list. Thanks for adding it.`,
+      `${hi}**${md(d.name)} is live.** 🎉 ${viaPr ? 'Your pull request is merged, which also makes you a contributor to the list. ' : ''}Thanks for adding it.`,
       '',
       `See it in the [README](${row})${card ? ` and on [the site](${card})` : ''}.`,
       '',
@@ -540,6 +582,8 @@ export function comment(action, { repo, site = SITE_URL, user = '' }) {
     '',
     bullets(action.reasons),
     '',
-    'To fix it, edit your file here: open the **Files changed** tab above, click the three dots on the file, then **Edit file**, and commit to the same branch. It gets looked at again automatically, so there is no need to open a new pull request.',
+    viaPr
+      ? 'To fix it, edit your file here: open the **Files changed** tab above, click the three dots on the file, then **Edit file**, and commit to the same branch. It gets looked at again automatically, so there is no need to open a new pull request.'
+      : 'To fix it, edit this issue: the three dots at the top right of your post, then **Edit**. It gets looked at again automatically, so there is no need to open a new issue.',
   ].join('\n');
 }

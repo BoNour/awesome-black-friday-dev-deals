@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Add a deal
+  - name: Add a deal with a pull request (recommended)
     url: https://github.com/meSingh/awesome-black-friday-dev-deals#add-your-deal
-    about: Deals come in as a pull request that adds one small file. The README has a link that sets it up for you.
+    about: One small file, set up for you by a link in the README. You are listed as a contributor once it is merged.
