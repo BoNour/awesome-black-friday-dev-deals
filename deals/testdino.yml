@@ -1,0 +1,12 @@
+name: TestDino
+url: https://testdino.com/pricing
+category: Developer tools
+discount: 30% off your first year on annual plans
+code: DINOFRIDAY30
+starts:
+ends: 2026-12-03
+description: Cloud reporting for Playwright tests with failure analysis and flaky test detection
+image:
+logo:
+relation:
+added: 2026-11-26

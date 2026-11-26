@@ -1,0 +1,12 @@
+name: DeployHQ
+url: https://www.deployhq.com/pricing
+category: Hosting and cloud
+discount: 50% off for 3 months
+code:
+starts:
+ends:
+description: Deployment service that builds and ships code from Git repositories to your servers
+image:
+logo:
+relation:
+added: 2026-11-26

@@ -1,0 +1,12 @@
+name: Unspam
+url: https://unspam.email/black-friday
+category: Email
+discount: 35% off the first payment of a new plan
+code: BLACKFRIDAY35
+starts: 2026-11-16
+ends: 2026-12-01
+description: Email testing for spam scores, inbox placement, device previews and DMARC monitoring
+image:
+logo:
+relation:
+added: 2026-11-26

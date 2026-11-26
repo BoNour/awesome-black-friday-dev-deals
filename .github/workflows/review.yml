@@ -1,13 +1,18 @@
 name: Review submissions
 
+# A submission is a pull request that adds one file under deals/.
 on:
-  issues:
-    types: [opened, edited, reopened]
+  # pull_request_target runs this workflow from main, with a token that can write, for pull
+  # requests from forks. That is safe here only because nothing from the pull request is ever
+  # checked out or executed: the job checks out main, and reads the submitted file as text
+  # through the API. Do not add a step that checks out or runs the pull request's code.
+  pull_request_target:
+    types: [opened, synchronize, reopened, edited, labeled]
   schedule:
     - cron: "*/30 * * * *"
   workflow_dispatch:
 
-# Nothing by default; each job asks for what it needs.
+# Nothing by default; the job asks for what it needs.
 permissions: {}
 
 concurrency:
@@ -16,13 +21,11 @@ concurrency:
 
 jobs:
   review:
-    # Issue text is never interpolated into a shell. The script reads issues through the API.
-    # The title check covers submissions that arrive without the form's label.
-    if: github.event_name != 'issues' || contains(github.event.issue.labels.*.name, 'deal-submission') || startsWith(github.event.issue.title, 'Deal:')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
       contents: write
+      pull-requests: write
       issues: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -39,22 +42,30 @@ jobs:
           REVIEW_ACTIONS: ${{ runner.temp }}/review-actions.json
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: node scripts/review.mjs decide
-      - name: Rebuild the README and the data the website reads
-        run: node scripts/build.mjs
-      - name: Commit
-        id: commit
+      - name: Merge the approved ones
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          REVIEW_ACTIONS: ${{ runner.temp }}/review-actions.json
+        run: node scripts/review.mjs merge
+      - name: Tidy the merged files and rebuild the README
+        env:
+          REVIEW_ACTIONS: ${{ runner.temp }}/review-actions.json
         run: |
-          if git diff --quiet -- data/deals.json data/site.json README.md; then
+          git pull --ff-only origin main
+          node scripts/review.mjs finalize
+          node scripts/build.mjs
+      - name: Commit
+        run: |
+          if [ -z "$(git status --porcelain -- deals data/site.json README.md)" ]; then
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/deals.json data/site.json README.md
-          git commit -m "Update deals from reviewed submissions"
+          git add deals data/site.json README.md
+          git commit -m "Update the list from reviewed submissions"
           git push
       - name: Reply to submitters
         env:
           GITHUB_TOKEN: ${{ github.token }}
           REVIEW_ACTIONS: ${{ runner.temp }}/review-actions.json
         run: node scripts/review.mjs notify
-

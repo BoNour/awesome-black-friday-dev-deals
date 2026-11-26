@@ -1,0 +1,12 @@
+name: CometAPI
+url: https://www.cometapi.com/campaigns/black-friday
+category: AI tools
+discount: Up to 28% below official API prices on selected models
+code:
+starts: 2026-11-24
+ends: 2026-12-03
+description: LLM API gateway that reaches models from many providers through one OpenAI-compatible endpoint
+image:
+logo:
+relation:
+added: 2026-11-26

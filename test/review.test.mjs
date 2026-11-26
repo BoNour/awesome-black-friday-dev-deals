@@ -1,16 +1,18 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseIssueForm, fieldsFromForm, review, checkUrl, clean, md, checkDiscount, comment, sniffImage, utm } from '../scripts/lib.mjs';
+import { parseDealFile, fieldsFromFile, dealFromFile, serializeDeal, DEAL_FILE, DEAL_TEMPLATE, submitUrl, review, checkUrl, clean, md, checkDiscount, comment, sniffImage, utm } from '../scripts/lib.mjs';
 
+// The tests describe a submission by the old form headings; this writes it as a deal file.
+const KEY = { 'Product name': 'name', 'Deal URL': 'url', Category: 'category', Discount: 'discount', 'Coupon code': 'code', 'Start date': 'starts', 'End date': 'ends', 'What is it': 'description', 'Your relation to the product': 'relation', 'Image link': 'image', 'Logo link': 'logo' };
 const body = (o = {}) => {
   const f = {
     'Product name': 'Acme CLI', 'Deal URL': 'https://acme.dev/black-friday', Category: 'Developer tools',
     Discount: '40% off annual plans', 'Coupon code': 'BF26', 'Start date': '2026-11-27', 'End date': '2026-11-30',
     'What is it': 'A command line tool that deploys containers to your own servers', 'Your relation to the product': 'I built it or work on it', ...o,
   };
-  return Object.entries(f).map(([k, v]) => `### ${k}\n\n${v || '_No response_'}`).join('\n\n');
+  return Object.entries(f).map(([k, v]) => `${KEY[k]}: ${v}`).join('\n') + '\n';
 };
-const run = (o, existing = [], now = '2026-11-26') => review(fieldsFromForm(parseIssueForm(body(o))), existing, now);
+const run = (o, existing = [], now = '2026-11-26') => review(fieldsFromFile(parseDealFile(body(o))), existing, now);
 
 test('a complete submission is approved', () => {
   const r = run();
@@ -142,4 +144,38 @@ test('an image is judged by its bytes, not its name', () => {
   assert.equal(sniffImage(new TextEncoder().encode('<svg xmlns="http://www.w3.org/2000/svg">')), null);
   assert.equal(sniffImage(new TextEncoder().encode('<html><script>alert(1)</script>')), null);
   assert.equal(sniffImage(new TextEncoder().encode('GIF89a')), null);
+});
+
+test('a deal file is flat key and value lines; comments, unknown keys and repeats are ignored', () => {
+  const f = parseDealFile('# a comment\nname: Acme CLI\nurl: "https://acme.dev/bf"\nevil: yes\nname: Second\n  discount:  40% off: this week \n\nnot a line');
+  assert.deepEqual(f, { name: 'Acme CLI', url: 'https://acme.dev/bf', discount: '40% off: this week' });
+});
+test('a submitter cannot set the fields only the maintainer sets', () => {
+  const fields = fieldsFromFile(parseDealFile(body() + 'own: true\nnoutm: true\nadded: 2020-01-01\nsubmitter: someone-else\n'));
+  assert.deepEqual(Object.keys(fields).sort(), ['category', 'code', 'description', 'discount', 'ends', 'image', 'logo', 'name', 'relation', 'starts', 'url']);
+  const r = review(fields, [], '2026-11-26');
+  assert.equal(r.verdict, 'approve');
+  assert.ok(!('own' in r.deal) && !('noutm' in r.deal) && !('added' in r.deal));
+});
+test('the template short forms for category and relation are understood', () => {
+  assert.equal(run({ Category: 'dev', 'Your relation to the product': 'I built it' }).verdict, 'approve');
+  assert.equal(run({ 'Your relation to the product': 'I use it' }).verdict, 'approve');
+  assert.equal(run({ 'Your relation to the product': 'No relation' }).verdict, 'approve');
+  assert.equal(run({ 'Your relation to the product': 'my cousin' }).verdict, 'needs-info');
+});
+test('a deal survives being written to a file and read back', () => {
+  const deal = { id: 'acme-cli', name: 'Acme CLI', url: 'https://acme.dev/bf?plan=pro', category: 'dev', discount: '40% off: annual plans', code: 'BF26', starts: '2026-11-27', ends: '2026-12-02', description: 'A command line tool', image: '', logo: 'https://acme.dev/icon.png', relation: 'I built it or work on it', added: '2026-11-27', submitter: 'octo-cat', source: '#7', noutm: true };
+  assert.deepEqual(dealFromFile('acme-cli', parseDealFile(serializeDeal(deal))), deal);
+  assert.ok(!serializeDeal({ ...deal, name: 'Acme\nown: true' }).includes('\nown: true'));
+});
+test('only a lowercase .yml file directly under deals/ counts as a submission', () => {
+  assert.equal('deals/acme-cli.yml'.match(DEAL_FILE)[1], 'acme-cli');
+  for (const p of ['deals/Acme.yml', 'deals/a/b.yml', 'deals/../x.yml', 'deals/acme.yaml', 'scripts/lib.mjs', 'deals/.yml', '.github/workflows/review.yml']) assert.equal(DEAL_FILE.test(p), false, p);
+});
+test('the add-your-deal link opens a new file under deals/ with the template filled in', () => {
+  const u = new URL(submitUrl('meSingh/awesome-black-friday-dev-deals'));
+  assert.equal(u.pathname, '/meSingh/awesome-black-friday-dev-deals/new/main/deals');
+  assert.equal(u.searchParams.get('filename'), 'your-product.yml');
+  assert.equal(u.searchParams.get('value'), DEAL_TEMPLATE);
+  assert.equal(review(fieldsFromFile(parseDealFile(DEAL_TEMPLATE)), [], '2026-11-26').verdict, 'needs-info');
 });

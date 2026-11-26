@@ -1,8 +1,31 @@
 # Contributing
 
-## Submitting a deal
+## Adding a deal
 
-Use the [Submit a deal](https://github.com/meSingh/awesome-black-friday-dev-deals/issues/new?template=submit-deal.yml) form. Please do not edit `README.md` or `data/deals.json` by hand: both are updated automatically when a submission is approved, so a manual edit gets overwritten.
+Each deal is one file in [`deals/`](deals), named after the product: `deals/acme-cli.yml`. You add yours as a pull request.
+
+The quick way: use the **[Add your deal](README.md#add-your-deal)** link in the README. GitHub opens a new file with the lines already laid out. Rename it, fill it in, click **Commit changes**, then **Create pull request**. If you do not have write access, GitHub forks the list for you first.
+
+```yaml
+name: Acme CLI
+url: https://acme.dev/black-friday
+category: Developer tools
+discount: 40% off annual plans
+code: BF26
+starts: 2026-11-27
+ends: 2026-12-02
+description: A command line tool that deploys containers to your own servers
+image:
+logo:
+relation: I built it
+```
+
+- One pull request, one new file, nothing else changed.
+- The file name is lowercase letters, digits and dashes, ending in `.yml`.
+- Each value stays on its own line. Leave `code`, `image` and `logo` empty if you have none.
+- `relation` is one of: `I built it`, `I use it`, `No relation`.
+
+Please do not edit `README.md` or `data/site.json`: both are written from the files in `deals/`.
 
 ## The rules
 
@@ -19,18 +42,18 @@ A deal is listed when all of these hold:
 
 Never listed: general retail (clothing, watches, beauty, household goods), gambling, adult content, crypto and get-rich schemes. The list is for software and tools that developers, founders and AI builders use.
 
-## What the reply on your issue means
+## What the reply on your pull request means
 
 | Reply | Meaning | What to do |
 |---|---|---|
-| "is live" | The deal is in the README | Nothing. A star or a share is welcome; your listing stays either way |
-| "nearly there" | A field is missing or malformed | Edit the issue; it gets looked at again, usually within the hour |
-| "nearly in" | Everything looks right, but the link would not open automatically | Nothing; the maintainer will open it and list it |
-| "not one for this list" | The deal breaks a rule | Reply on the issue if you think we got it wrong |
+| "is live" | Your pull request is merged and the deal is in the README | Nothing. A star or a share is welcome; your listing stays either way |
+| "nearly there" | A line is missing or malformed | Edit your file in the pull request (Files changed, the three dots, Edit file); it gets looked at again by itself |
+| "nearly in" | Everything looks right, but the link would not open automatically | Nothing; the maintainer opens the page and merges it |
+| "not one for this list" | The deal breaks a rule | Reply on the pull request if you think we got it wrong |
 
 ## Changing a deal that is already listed
 
-Open a new submission with the corrected details and mention the original issue. The old entry is replaced once the new one is approved by the maintainer.
+Open a pull request that edits the deal's file in `deals/`. A change to a deal that is already listed is looked at by the maintainer, not merged automatically.
 
 ## Changing the code
 

@@ -1,0 +1,12 @@
+name: SaaSykit
+url: https://saasykit.com/
+category: Starter kits
+discount: 50% off all plans
+code:
+starts:
+ends:
+description: Laravel SaaS starter kit with subscriptions, admin panel and optional multi-tenancy
+image:
+logo:
+relation:
+added: 2026-11-26

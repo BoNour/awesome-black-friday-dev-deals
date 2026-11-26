@@ -80,40 +80,141 @@ export function md(value) {
   return clean(value, 400).replace(/([\\|*_~\[\]#])/g, '\\$1');
 }
 
-/** Parse the body GitHub writes for an Issue Form into { heading: value }. */
-export function parseIssueForm(body) {
+// ---------------------------------------------------------------------------
+// One deal, one file: deals/<id>.yml. Flat `key: value` lines, nothing nested, so a person
+// can fill one in on GitHub's own edit page and no YAML library is needed to read it.
+
+/** The only path a submission may add. The file name, without .yml, is the deal's id. */
+export const DEAL_FILE = /^deals\/([a-z0-9][a-z0-9-]{0,80})\.yml$/;
+export const MAX_DEAL_FILE_BYTES = 4000;
+// What a submitter fills in, then what only the maintainer or the review sets.
+const SUBMITTED_KEYS = ['name', 'url', 'category', 'discount', 'code', 'starts', 'ends', 'description', 'image', 'logo', 'relation'];
+const KEPT_KEYS = ['added', 'submitter', 'source', 'own', 'noutm'];
+
+/** Read a deal file into { key: value }. Unknown keys, comments and repeats are ignored. */
+export function parseDealFile(text) {
   const out = {};
-  const text = String(body ?? '').replace(/\r\n?/g, '\n');
-  const parts = text.split(/^### +(.+?) *$/m);
-  for (let i = 1; i < parts.length; i += 2) {
-    const key = parts[i].trim().toLowerCase();
-    let value = (parts[i + 1] ?? '').trim();
-    if (/^_no response_$/i.test(value) || /^none$/i.test(value)) value = '';
+  for (const raw of String(text ?? '').replace(/\r\n?/g, '\n').split('\n')) {
+    const line = raw.trim();
+    if (!line || line.startsWith('#')) continue;
+    const m = line.match(/^([A-Za-z_]+)\s*:(.*)$/);
+    if (!m) continue;
+    const key = m[1].toLowerCase();
+    if (!(SUBMITTED_KEYS.includes(key) || KEPT_KEYS.includes(key)) || key in out) continue;
+    let value = m[2].trim();
+    const quoted = value.match(/^(["'])(.*)\1$/);
+    if (quoted) value = quoted[2];
     out[key] = value;
   }
   return out;
 }
 
-/** Map form headings to the fields of a deal. */
-export function fieldsFromForm(form) {
-  const get = (...names) => {
-    for (const n of names) if (form[n] != null) return form[n];
-    return '';
-  };
+const relationFrom = (text) => {
+  const t = clean(text, 80).toLowerCase();
+  if (/^i (built|made|work)/.test(t)) return RELATIONS[0];
+  if (/^i (use|am a customer)/.test(t)) return RELATIONS[1];
+  if (/^(no relation|none|i found)/.test(t)) return RELATIONS[2];
+  return clean(text, 80);
+};
+const categoryFrom = (text) => {
+  const t = clean(text, 60).toLowerCase();
+  return CATEGORIES.find((c) => c.id === t || c.name.toLowerCase() === t);
+};
+
+/**
+ * The fields of a submission, from a parsed deal file. Only what a submitter may set is read:
+ * a file that arrives claiming `own: true` or an `added` date has those lines ignored.
+ */
+export function fieldsFromFile(file) {
+  const get = (k) => file[k] ?? '';
   return {
-    name: clean(get('product name'), 80),
-    url: get('deal url').split(/\s+/)[0] ?? '',
-    category: clean(get('category'), 60),
+    name: clean(get('name'), 80),
+    url: get('url').split(/\s+/)[0] ?? '',
+    category: categoryFrom(get('category'))?.name ?? clean(get('category'), 60),
     discount: clean(get('discount'), 80),
-    code: clean(get('coupon code'), 60),
-    starts: clean(get('start date'), 20),
-    ends: clean(get('end date'), 20),
-    description: clean(get('what is it'), 220),
-    relation: clean(get('your relation to the product'), 80),
-    image: (get('image link').split(/\s+/)[0] ?? '').trim(),
-    logo: (get('logo link').split(/\s+/)[0] ?? '').trim(),
+    code: clean(get('code'), 60),
+    starts: clean(get('starts'), 20),
+    ends: clean(get('ends'), 20),
+    description: clean(get('description'), 220),
+    relation: relationFrom(get('relation')),
+    image: (get('image').split(/\s+/)[0] ?? '').trim(),
+    logo: (get('logo').split(/\s+/)[0] ?? '').trim(),
   };
 }
+
+/** A listed deal, from a file already in the repository. These files are trusted. */
+export function dealFromFile(id, file) {
+  const get = (k) => clean(file[k] ?? '', 400);
+  return {
+    id,
+    name: get('name'),
+    url: (file.url ?? '').trim(),
+    category: categoryFrom(file.category)?.id ?? 'other',
+    discount: get('discount'),
+    code: get('code'),
+    starts: get('starts'),
+    ends: get('ends'),
+    description: get('description'),
+    image: (file.image ?? '').trim(),
+    logo: (file.logo ?? '').trim(),
+    relation: get('relation'),
+    added: get('added'),
+    submitter: get('submitter'),
+    source: get('source'),
+    ...(file.own === 'true' ? { own: true } : {}),
+    ...(file.noutm === 'true' ? { noutm: true } : {}),
+  };
+}
+
+/** Write a deal back as a file, always in the same order. */
+export function serializeDeal(deal) {
+  const one = (v) => String(v ?? '').replace(/[\r\n]+/g, ' ').trim();
+  const lines = [
+    `name: ${one(deal.name)}`,
+    `url: ${one(deal.url)}`,
+    `category: ${CATEGORIES.find((c) => c.id === deal.category)?.name ?? 'Other'}`,
+    `discount: ${one(deal.discount)}`,
+    `code: ${one(deal.code)}`,
+    `starts: ${one(deal.starts)}`,
+    `ends: ${one(deal.ends)}`,
+    `description: ${one(deal.description)}`,
+    `image: ${one(deal.image)}`,
+    `logo: ${one(deal.logo)}`,
+    `relation: ${one(deal.relation)}`,
+  ];
+  for (const k of ['added', 'submitter', 'source']) if (deal[k]) lines.push(`${k}: ${one(deal[k])}`);
+  if (deal.own) lines.push('own: true');
+  if (deal.noutm) lines.push('noutm: true');
+  return lines.map((l) => l.trimEnd()).join('\n') + '\n';
+}
+
+/** What the "Add your deal" link opens in GitHub's editor. */
+export const DEAL_TEMPLATE = `# Add your Black Friday deal. It is free.
+#
+# 1. Rename this file to your product, for example acme-cli.yml
+#    (lowercase letters, digits and dashes).
+# 2. Fill in the lines below. Leave code, image and logo empty if you have none.
+# 3. Click "Commit changes", then "Create pull request". That is all.
+#
+# category is one of: ${CATEGORIES.map((c) => c.name).join(' | ')}
+# relation is one of: I built it | I use it | No relation
+# dates look like 2026-11-27
+
+name:
+url:
+category:
+discount:
+code:
+starts:
+ends:
+description:
+image:
+logo:
+relation:
+`;
+/** Opens GitHub's "new file" page under deals/ with the template filled in. For someone without
+ *  write access GitHub forks the repository and turns the commit into a pull request. */
+export const submitUrl = (repo) => `https://github.com/${repo}/new/main/deals?filename=your-product.yml&value=${encodeURIComponent(DEAL_TEMPLATE)}`;
 
 function isIsoDate(s) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(s)) return false;
@@ -378,7 +479,7 @@ export function comment(action, { repo, site = SITE_URL, user = '' }) {
     const x = `https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(home)}`;
     const li = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(home)}`;
     return [
-      `${hi}**${md(d.name)} is live.** 🎉 Thanks for adding it.`,
+      `${hi}**${md(d.name)} is live.** 🎉 Your pull request is merged, which also makes you a contributor to the list. Thanks for adding it.`,
       '',
       `See it in the [README](${row})${card ? ` and on [the site](${card})` : ''}.`,
       '',
@@ -430,6 +531,6 @@ export function comment(action, { repo, site = SITE_URL, user = '' }) {
     '',
     bullets(action.reasons),
     '',
-    'To fix it, edit this issue: the three dots at the top right of your post, then **Edit**. It gets looked at again automatically, usually within the hour, so there is no need to open a new issue.',
+    'To fix it, edit your file here: open the **Files changed** tab above, click the three dots on the file, then **Edit file**, and commit to the same branch. It gets looked at again automatically, so there is no need to open a new pull request.',
   ].join('\n');
 }

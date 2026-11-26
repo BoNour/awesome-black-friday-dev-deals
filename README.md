@@ -11,7 +11,7 @@ Grab a code, save some money, get back to building.
 **71 deals and counting** · last updated 26 Nov 2026
 <!-- stats:end -->
 
-**[Submit a deal](https://github.com/meSingh/awesome-black-friday-dev-deals/issues/new?template=submit-deal.yml)** · **[Star the list](https://github.com/meSingh/awesome-black-friday-dev-deals)**
+**[Add your deal](https://github.com/meSingh/awesome-black-friday-dev-deals/new/main/deals?filename=your-product.yml&value=%23%20Add%20your%20Black%20Friday%20deal.%20It%20is%20free.%0A%23%0A%23%201.%20Rename%20this%20file%20to%20your%20product%2C%20for%20example%20acme-cli.yml%0A%23%20%20%20%20(lowercase%20letters%2C%20digits%20and%20dashes).%0A%23%202.%20Fill%20in%20the%20lines%20below.%20Leave%20code%2C%20image%20and%20logo%20empty%20if%20you%20have%20none.%0A%23%203.%20Click%20%22Commit%20changes%22%2C%20then%20%22Create%20pull%20request%22.%20That%20is%20all.%0A%23%0A%23%20category%20is%20one%20of%3A%20AI%20tools%20%7C%20AI%20video%2C%20image%20and%20voice%20%7C%20Developer%20tools%20%7C%20Hosting%20and%20cloud%20%7C%20Databases%20and%20backend%20%7C%20Email%20%7C%20Design%20and%20UI%20%7C%20Starter%20kits%20%7C%20SEO%20and%20marketing%20%7C%20Courses%20and%20books%20%7C%20Productivity%20%7C%20Mac%20and%20desktop%20apps%20%7C%20Security%20%7C%20Other%0A%23%20relation%20is%20one%20of%3A%20I%20built%20it%20%7C%20I%20use%20it%20%7C%20No%20relation%0A%23%20dates%20look%20like%202026-11-27%0A%0Aname%3A%0Aurl%3A%0Acategory%3A%0Adiscount%3A%0Acode%3A%0Astarts%3A%0Aends%3A%0Adescription%3A%0Aimage%3A%0Alogo%3A%0Arelation%3A%0A)** · **[Star the list](https://github.com/meSingh/awesome-black-friday-dev-deals)**
 
 </div>
 
@@ -25,11 +25,11 @@ I wanted one place for the Black Friday deals I would use as a developer, so I m
 
 ## Add your deal
 
-It is free, and you do not need to open a pull request.
+It is free and takes about two minutes. You do not need to clone anything or know Git.
 
-1. Open **[Submit a deal](https://github.com/meSingh/awesome-black-friday-dev-deals/issues/new?template=submit-deal.yml)** and fill in the short form.
-2. You get a reply on your issue, usually within the hour. If something needs fixing, the reply says exactly what, and you can edit the issue in place.
-3. Once it is approved, your deal shows up here.
+1. Open **[Add your deal](https://github.com/meSingh/awesome-black-friday-dev-deals/new/main/deals?filename=your-product.yml&value=%23%20Add%20your%20Black%20Friday%20deal.%20It%20is%20free.%0A%23%0A%23%201.%20Rename%20this%20file%20to%20your%20product%2C%20for%20example%20acme-cli.yml%0A%23%20%20%20%20(lowercase%20letters%2C%20digits%20and%20dashes).%0A%23%202.%20Fill%20in%20the%20lines%20below.%20Leave%20code%2C%20image%20and%20logo%20empty%20if%20you%20have%20none.%0A%23%203.%20Click%20%22Commit%20changes%22%2C%20then%20%22Create%20pull%20request%22.%20That%20is%20all.%0A%23%0A%23%20category%20is%20one%20of%3A%20AI%20tools%20%7C%20AI%20video%2C%20image%20and%20voice%20%7C%20Developer%20tools%20%7C%20Hosting%20and%20cloud%20%7C%20Databases%20and%20backend%20%7C%20Email%20%7C%20Design%20and%20UI%20%7C%20Starter%20kits%20%7C%20SEO%20and%20marketing%20%7C%20Courses%20and%20books%20%7C%20Productivity%20%7C%20Mac%20and%20desktop%20apps%20%7C%20Security%20%7C%20Other%0A%23%20relation%20is%20one%20of%3A%20I%20built%20it%20%7C%20I%20use%20it%20%7C%20No%20relation%0A%23%20dates%20look%20like%202026-11-27%0A%0Aname%3A%0Aurl%3A%0Acategory%3A%0Adiscount%3A%0Acode%3A%0Astarts%3A%0Aends%3A%0Adescription%3A%0Aimage%3A%0Alogo%3A%0Arelation%3A%0A)**. GitHub shows a small file with the lines to fill in.
+2. Rename it to your product (`acme-cli.yml`), fill in the lines, then click **Commit changes** and **Create pull request**. GitHub makes your own copy of the list for this; that is normal.
+3. Your pull request gets a reply, usually within minutes. If something needs fixing, the reply says exactly what. Once it passes, it is merged, your deal shows up here, and you are a contributor to the list.
 
 A few things are not accepted: general retail such as clothing or watches, gambling, adult content, crypto schemes, shortened or affiliate links, deals that have already ended and duplicates. The details are in [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -187,11 +187,11 @@ If the list helps you, a star and a share help other developers find it. Your li
 
 ---
 
-**Have a deal to add?** [Submit it here](https://github.com/meSingh/awesome-black-friday-dev-deals/issues/new?template=submit-deal.yml). **Found this useful?** [Star the list](https://github.com/meSingh/awesome-black-friday-dev-deals) so more developers find it.
+**Have a deal to add?** [Add it here](https://github.com/meSingh/awesome-black-friday-dev-deals/new/main/deals?filename=your-product.yml&value=%23%20Add%20your%20Black%20Friday%20deal.%20It%20is%20free.%0A%23%0A%23%201.%20Rename%20this%20file%20to%20your%20product%2C%20for%20example%20acme-cli.yml%0A%23%20%20%20%20(lowercase%20letters%2C%20digits%20and%20dashes).%0A%23%202.%20Fill%20in%20the%20lines%20below.%20Leave%20code%2C%20image%20and%20logo%20empty%20if%20you%20have%20none.%0A%23%203.%20Click%20%22Commit%20changes%22%2C%20then%20%22Create%20pull%20request%22.%20That%20is%20all.%0A%23%0A%23%20category%20is%20one%20of%3A%20AI%20tools%20%7C%20AI%20video%2C%20image%20and%20voice%20%7C%20Developer%20tools%20%7C%20Hosting%20and%20cloud%20%7C%20Databases%20and%20backend%20%7C%20Email%20%7C%20Design%20and%20UI%20%7C%20Starter%20kits%20%7C%20SEO%20and%20marketing%20%7C%20Courses%20and%20books%20%7C%20Productivity%20%7C%20Mac%20and%20desktop%20apps%20%7C%20Security%20%7C%20Other%0A%23%20relation%20is%20one%20of%3A%20I%20built%20it%20%7C%20I%20use%20it%20%7C%20No%20relation%0A%23%20dates%20look%20like%202026-11-27%0A%0Aname%3A%0Aurl%3A%0Acategory%3A%0Adiscount%3A%0Acode%3A%0Astarts%3A%0Aends%3A%0Adescription%3A%0Aimage%3A%0Alogo%3A%0Arelation%3A%0A). **Found this useful?** [Star the list](https://github.com/meSingh/awesome-black-friday-dev-deals) so more developers find it.
 
 ## How a deal gets listed
 
-You fill in the form. A quick automatic review looks at the link, the dates and the discount, then replies on your issue: listed, or what to fix. The rules are in the open in [`scripts/lib.mjs`](scripts/lib.mjs) if you want to read them.
+Each deal is one small file in [`deals/`](deals). You add yours as a pull request. A quick automatic review looks at the link, the dates and the discount, then replies on the pull request: merged and listed, or what to fix. The rules are in the open in [`scripts/lib.mjs`](scripts/lib.mjs) if you want to read them.
 
 Deals change, so look at the seller's page before you buy. Spotted one that has expired or is wrong? [Tell me here](https://github.com/meSingh/awesome-black-friday-dev-deals/issues/new?template=report-deal.yml).
 

@@ -1,0 +1,12 @@
+name: Nuntly
+url: https://nuntly.com/black-friday
+category: Email
+discount: 40% off the first 12 monthly payments
+code: BLACKFRIDAY26
+starts:
+ends: 2026-12-31
+description: Transactional email API for developers with a free tier and EU hosting
+image:
+logo:
+relation:
+added: 2026-11-26

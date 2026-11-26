@@ -1,13 +1,15 @@
-// Generates the README tables and data/site.json (what the website reads) from data/deals.json.
+// Generates the README tables and data/site.json (what the website reads) from the files in deals/.
 // Run: node scripts/build.mjs
 import { readFileSync, writeFileSync } from 'node:fs';
-import { CATEGORIES, YEAR, BLACK_FRIDAY, CYBER_MONDAY, md, status, shortDate, anchor, utm } from './lib.mjs';
+import { CATEGORIES, YEAR, BLACK_FRIDAY, CYBER_MONDAY, md, status, shortDate, anchor, utm, submitUrl } from './lib.mjs';
+import { readDeals } from './deals.mjs';
 
 const root = new URL('..', import.meta.url);
 const read = (p) => readFileSync(new URL(p, root), 'utf8');
 const now = new Date().toISOString().slice(0, 10);
 
-const deals = JSON.parse(read('data/deals.json'));
+const REPO = 'meSingh/awesome-black-friday-dev-deals';
+const deals = readDeals();
 const shown = deals.filter((d) => status(d, now) !== 'ended');
 shown.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
 
@@ -17,7 +19,7 @@ const when = (d) => {
   const range = d.starts && d.ends ? `${shortDate(d.starts)} to ${shortDate(d.ends)}` : d.ends ? `Until ${shortDate(d.ends)}` : '';
   return s === 'upcoming' ? `Starts ${shortDate(d.starts)}` : range;
 };
-// A seller whose page breaks on extra parameters gets `"noutm": true` in deals.json.
+// A seller whose page breaks on extra parameters gets `noutm: true` in its file.
 const link = (d) => (d.noutm ? d.url : utm(d.url)).replace(/[()|\s]/g, (c) => encodeURIComponent(c));
 const offer = (d) => `**${md(d.discount)}**${d.code ? ` with code \`${d.code.replace(/[^A-Za-z0-9_\-]/g, '')}\`` : ''}`;
 
@@ -43,6 +45,7 @@ const swap = (text, name, body) => {
 
 let readme = read('README.md');
 readme = swap(readme, 'stats', stats);
+readme = readme.replace(/\]\(https:\/\/github\.com\/[^)\s]+\/new\/main\/deals\?[^)\s]*\)/g, () => `](${submitUrl(REPO)})`);
 readme = swap(readme, 'toc', toc.join('\n') || '_No deals yet. Yours could be the first._');
 readme = swap(readme, 'deals', sections.join('\n\n') || '_No deals yet. Yours could be the first._');
 writeFileSync(new URL('README.md', root), readme);
@@ -52,6 +55,7 @@ const site = {
   blackFriday: BLACK_FRIDAY,
   cyberMonday: CYBER_MONDAY,
   updated: now,
+  submit: submitUrl(REPO),
   categories: CATEGORIES.filter((c) => shown.some((d) => d.category === c.id)).map(({ id, name }) => ({ id, name })),
   deals: shown.map(({ id, name, url, category, discount, code, starts, ends, description, added, own, image, logo, noutm }) => ({ id, name, url, category, discount, code, starts, ends, description, added, ...(own ? { own: true } : {}), ...(image ? { image } : {}), ...(logo ? { logo } : {}), ...(noutm ? { noutm: true } : {}) })),
 };

@@ -1,0 +1,12 @@
+name: SSOJet
+url: https://ssojet.com/blog/black-friday-deals
+category: Security
+discount: 20% off
+code: BF2026
+starts:
+ends: 2026-12-15
+description: Enterprise SSO, SCIM and directory sync API for B2B SaaS apps
+image:
+logo:
+relation:
+added: 2026-11-26

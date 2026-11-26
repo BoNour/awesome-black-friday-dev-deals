@@ -1,20 +1,23 @@
-// Reviews open deal submissions.
+// Reviews open deal submissions. A submission is a pull request that adds one file, deals/<id>.yml.
 //
-//   node scripts/review.mjs decide   reads open issues, applies the rules, updates data/deals.json,
-//                                    writes the list of actions to take
-//   node scripts/review.mjs notify   comments on, labels and closes the issues
+//   node scripts/review.mjs decide     reads the open pull requests and applies the rules; writes
+//                                      the list of actions to take
+//   node scripts/review.mjs merge      merges the approved ones, pinned to the commit that was reviewed
+//   node scripts/review.mjs finalize   rewrites each merged deal's file in the canonical shape
+//                                      (run after pulling main)
+//   node scripts/review.mjs notify     comments on, labels and closes the pull requests
 //
-// The two halves are separate so that an issue is only told "you are listed"
-// after the commit with its deal has been pushed.
+// The steps are separate so that nobody is told "you are listed" before their deal is on main.
 //
-// Issue text is untrusted. It is read through the API as data, cleaned by
-// lib.mjs and never passed to a shell.
+// A pull request is untrusted. Its code is never checked out or run: the one file it adds is
+// read through the API as text, parsed by lib.mjs and cleaned field by field, and nothing from
+// it is ever passed to a shell.
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { parseIssueForm, fieldsFromForm, review, checkUrl, comment, SITE_URL, sniffImage, MAX_IMAGE_BYTES, CATEGORIES } from './lib.mjs';
+import { parseDealFile, fieldsFromFile, review, checkUrl, comment, SITE_URL, sniffImage, MAX_IMAGE_BYTES, MAX_DEAL_FILE_BYTES, DEAL_FILE, CATEGORIES } from './lib.mjs';
+import { readDeals, writeDeal } from './deals.mjs';
 
 const root = new URL('..', import.meta.url);
-const DEALS = new URL('data/deals.json', root);
 const ACTIONS = process.env.REVIEW_ACTIONS || new URL('.review-actions.json', root).pathname;
 const REPO = process.env.GITHUB_REPOSITORY;
 const TOKEN = process.env.GITHUB_TOKEN;
@@ -169,72 +172,104 @@ async function secondOpinion(deal) {
   }
 }
 
+/** Network checks for a deal the rules have passed. Mutates the action and the deal. */
+async function checkLive(action, deal, cleared) {
+  const link = cleared ? { state: 'ok', detail: '' } : await probe(deal.url);
+  if (link.state === 'banned') return Object.assign(action, { verdict: 'reject', reasons: [link.detail] });
+  if (link.state === 'gone') return Object.assign(action, { verdict: 'needs-info', reasons: [link.detail + ' Check the address and edit your file.'] });
+  if (link.state === 'unsure') return Object.assign(action, { verdict: 'hold', reasons: [link.detail] });
+  const doubt = await secondOpinion(deal);
+  if (doubt) return Object.assign(action, { verdict: 'hold', reasons: [`A second check asked for a human look: ${doubt}`] });
+  if (deal.image) {
+    const pic = await probeImage(deal.image);
+    if (!pic.ok) return Object.assign(action, { verdict: 'needs-info', reasons: [`${pic.why} Fix the link, or leave image empty and we will use the image from your page.`] });
+  } else deal.image = await pageImage(deal.url);
+  if (deal.logo) {
+    const pic = await probeImage(deal.logo);
+    if (!pic.ok) return Object.assign(action, { verdict: 'needs-info', reasons: [`The logo: ${pic.why.replace('The image', 'the')} Fix the link, or leave logo empty and we will use the icon from your site.`] });
+  } else deal.logo = await pageIcon(deal.url);
+  return action;
+}
+
 async function decide() {
-  const deals = JSON.parse(readFileSync(DEALS, 'utf8'));
-  // GitHub does not always put the form's label on an issue from someone outside the repository,
-  // so a submission is recognised by its label or by the form's own shape: the title and the headings.
-  const isSubmission = (i) => i.labels.some((l) => l.name === LABEL) || (/^deal:/i.test(i.title || '') && /^### Deal URL/m.test(i.body || ''));
-  const issues = (await gh(`/repos/${REPO}/issues?state=open&per_page=100&sort=created&direction=asc`))
-    .filter((i) => !i.pull_request)
-    .filter(isSubmission)
+  const deals = readDeals();
+  const prs = (await gh(`/repos/${REPO}/pulls?state=open&base=main&per_page=100&sort=created&direction=asc`))
+    .filter((p) => !p.draft)
     // A held submission waits for the maintainer. Once they have opened the page themselves they add
     // the `maintainer-ok` label, and the next run lists the deal without probing the link again.
-    .filter((i) => !i.labels.some((l) => l.name === 'needs-maintainer') || i.labels.some((l) => l.name === OK_LABEL))
+    .filter((p) => !p.labels.some((l) => l.name === 'needs-maintainer') || p.labels.some((l) => l.name === OK_LABEL))
     .slice(0, MAX_PER_RUN);
 
   const actions = [];
   const now = new Date().toISOString().slice(0, 10);
-  for (const issue of issues) {
-    const fields = fieldsFromForm(parseIssueForm(issue.body));
-    const result = review(fields, deals, now);
-    const action = { number: issue.number, verdict: result.verdict, reasons: result.reasons, name: fields.name, user: issue.user?.login ?? '' };
+  for (const pr of prs) {
+    const user = pr.user?.login ?? '';
+    const files = await gh(`/repos/${REPO}/pulls/${pr.number}/files?per_page=100`);
+    // A pull request that touches no deal file is not a submission; it is the maintainer's to handle.
+    if (!files.some((f) => f.filename.startsWith('deals/'))) { console.log(`#${pr.number}: not a deal submission, left alone`); continue; }
 
-    if (result.verdict === 'approve') {
-      const cleared = issue.labels.some((l) => l.name === OK_LABEL);
-      const link = cleared ? { state: 'ok', detail: '' } : await probe(result.deal.url);
-      if (link.state === 'banned') Object.assign(action, { verdict: 'reject', reasons: [link.detail] });
-      else if (link.state === 'gone') Object.assign(action, { verdict: 'needs-info', reasons: [link.detail + ' Check the address and edit the issue.'] });
-      else if (link.state === 'unsure') Object.assign(action, { verdict: 'hold', reasons: [link.detail] });
+    const action = { number: pr.number, user, sha: pr.head.sha, verdict: 'needs-info', reasons: [], name: '' };
+    const only = files.length === 1 ? files[0] : null;
+    const match = only?.filename.match(DEAL_FILE);
+    if (!only) action.reasons.push(`A submission adds one file under \`deals/\` and changes nothing else. This pull request changes ${files.length} files.`);
+    else if (only.status !== 'added') Object.assign(action, { verdict: 'hold', reasons: ['This changes a deal that is already listed, so it needs a person to look at it.'] });
+    else if (!match) action.reasons.push('Name the file after your product, in lowercase letters, digits and dashes, ending in `.yml`: for example `deals/acme-cli.yml`.');
+    else if (match[1] === 'your-product') action.reasons.push('Rename the file from `your-product.yml` to your product, for example `acme-cli.yml`.');
+    else if (!pr.head.repo) action.reasons.push('The branch this pull request came from no longer exists. Please open a new one.');
+    else {
+      const got = await gh(`/repos/${pr.head.repo.full_name}/contents/${only.filename}?ref=${pr.head.sha}`);
+      if (!got || got.type !== 'file' || got.size > MAX_DEAL_FILE_BYTES) action.reasons.push('The file is too long. Keep it to the lines in the template.');
       else {
-        const doubt = await secondOpinion(result.deal);
-        if (doubt) Object.assign(action, { verdict: 'hold', reasons: [`A second check asked for a human look: ${doubt}`] });
-        else if (result.deal.image) {
-          const pic = await probeImage(result.deal.image);
-          if (!pic.ok) Object.assign(action, { verdict: 'needs-info', reasons: [`${pic.why} Fix the link, or clear the field and we will use the image from your page.`] });
-        } else {
-          result.deal.image = await pageImage(result.deal.url);
-        }
-        if (action.verdict === 'approve') {
-          if (result.deal.logo) {
-            const pic = await probeImage(result.deal.logo);
-            if (!pic.ok) Object.assign(action, { verdict: 'needs-info', reasons: [`The logo: ${pic.why.replace('The image', 'the')} Fix the link, or clear the field and we will use the icon from your site.`] });
-          } else {
-            result.deal.logo = await pageIcon(result.deal.url);
+        const fields = fieldsFromFile(parseDealFile(Buffer.from(got.content || '', 'base64').toString('utf8')));
+        const result = review(fields, deals, now);
+        Object.assign(action, { verdict: result.verdict, reasons: result.reasons, name: fields.name });
+        if (result.verdict === 'approve') {
+          const deal = { ...result.deal, id: match[1], added: now, source: `#${pr.number}`, submitter: user };
+          if (deals.some((d) => d.id === deal.id)) Object.assign(action, { verdict: 'needs-info', reasons: ['A deal with this file name is already listed. Pick another name for your file.'] });
+          else await checkLive(action, deal, pr.labels.some((l) => l.name === OK_LABEL));
+          if (action.verdict === 'approve') {
+            action.deal = { ...deal, categoryName: CATEGORIES.find((c) => c.id === deal.category)?.name ?? 'Other' };
+            deals.push(deal);
           }
         }
       }
     }
-
-    if (action.verdict === 'approve') {
-      const deal = { ...result.deal, added: now, source: `#${issue.number}`, submitter: issue.user?.login ?? '' };
-      let id = deal.id;
-      for (let n = 2; deals.some((d) => d.id === id); n++) id = `${deal.id}-${n}`;
-      deal.id = id;
-      deals.push(deal);
-      action.deal = { id: deal.id, name: deal.name, discount: deal.discount, code: deal.code, categoryName: CATEGORIES.find((c) => c.id === deal.category)?.name ?? 'Other' };
-    }
     actions.push(action);
-    console.log(`#${issue.number}: ${action.verdict}${action.reasons.length ? ' (' + action.reasons.join(' | ') + ')' : ''}`);
+    console.log(`#${pr.number}: ${action.verdict}${action.reasons.length ? ' (' + action.reasons.join(' | ') + ')' : ''}`);
   }
 
-  writeFileSync(DEALS, JSON.stringify(deals, null, 2) + '\n');
   writeFileSync(ACTIONS, JSON.stringify(actions, null, 2));
   console.log(`Reviewed ${actions.length} open submission(s).`);
 }
 
+const readActions = () => (existsSync(ACTIONS) ? JSON.parse(readFileSync(ACTIONS, 'utf8')) : []);
+
+/** Merge what was approved. The merge is pinned to the reviewed commit, so a later push cannot ride along. */
+async function merge() {
+  const actions = readActions();
+  for (const a of actions) {
+    if (a.verdict !== 'approve') continue;
+    try {
+      await gh(`/repos/${REPO}/pulls/${a.number}/merge`, { method: 'PUT', body: { merge_method: 'squash', sha: a.sha, commit_title: `Add ${a.deal.name} (#${a.number})`, commit_message: '' } });
+      a.merged = true;
+      console.log(`#${a.number}: merged`);
+    } catch (err) {
+      console.error(`#${a.number}: ${err.message}`);
+      Object.assign(a, { verdict: 'hold', reasons: ['Everything checks out, but the pull request could not be merged automatically, so the maintainer will merge it by hand.'] });
+    }
+  }
+  writeFileSync(ACTIONS, JSON.stringify(actions, null, 2));
+}
+
+/** After main is pulled: write each merged deal's file in the canonical shape, with what the review found. */
+function finalize() {
+  const merged = readActions().filter((a) => a.merged);
+  for (const a of merged) writeDeal(a.deal);
+  console.log(`Finalised ${merged.length} deal file(s).`);
+}
+
 async function notify() {
-  if (!existsSync(ACTIONS)) return console.log('No actions to send.');
-  const actions = JSON.parse(readFileSync(ACTIONS, 'utf8'));
+  const actions = readActions();
   const labelFor = { approve: 'approved', reject: 'rejected', hold: 'needs-maintainer', 'needs-info': 'needs-info' };
   for (const a of actions) {
     const body = comment(a, { repo: REPO, site: SITE, user: a.user });
@@ -247,8 +282,7 @@ async function notify() {
         await gh(`${base}/labels/${encodeURIComponent(stale)}`, { method: 'DELETE' }).catch(() => {});
       }
       await gh(`${base}/labels`, { method: 'POST', body: { labels: [LABEL, labelFor[a.verdict]] } });
-      if (a.verdict === 'approve') await gh(base, { method: 'PATCH', body: { state: 'closed', state_reason: 'completed' } });
-      if (a.verdict === 'reject') await gh(base, { method: 'PATCH', body: { state: 'closed', state_reason: 'not_planned' } });
+      if (a.verdict === 'reject') await gh(`/repos/${REPO}/pulls/${a.number}`, { method: 'PATCH', body: { state: 'closed' } });
     } catch (err) {
       console.error(`#${a.number}: ${err.message}`);
       process.exitCode = 1;
@@ -258,10 +292,11 @@ async function notify() {
 }
 
 const mode = process.argv[2];
-if (mode === 'decide' || mode === 'notify') {
-  if (!REPO || !TOKEN) throw new Error('GITHUB_REPOSITORY and GITHUB_TOKEN are required');
-  await (mode === 'decide' ? decide() : notify());
+const steps = { decide, merge, finalize, notify };
+if (steps[mode]) {
+  if (mode !== 'finalize' && (!REPO || !TOKEN)) throw new Error('GITHUB_REPOSITORY and GITHUB_TOKEN are required');
+  await steps[mode]();
 } else if (import.meta.url === `file://${process.argv[1]}`) {
-  console.error('Usage: node scripts/review.mjs decide|notify');
+  console.error('Usage: node scripts/review.mjs decide|merge|finalize|notify');
   process.exit(2);
 }

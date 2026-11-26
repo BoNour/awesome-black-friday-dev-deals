@@ -1,0 +1,13 @@
+name: GitKraken
+url: https://www.gitkraken.com/pricing
+category: Developer tools
+discount: 60% off Pro
+code:
+starts:
+ends:
+description: Git GUI client plus GitLens for IDEs and related Git tooling
+image:
+logo:
+relation:
+added: 2026-11-26
+noutm: true
