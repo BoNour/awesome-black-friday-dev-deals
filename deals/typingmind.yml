@@ -6,6 +6,9 @@ code: BLACKFRIDAY2026
 starts: 2026-11-02
 ends: 2026-12-05
 description: Chat UI for ChatGPT, Claude, Gemini and other AI models with your own API keys, with MCP, plugins, AI agents and local chat storage
-image:
-logo:
-relation: I built it
+image: https://image.social/get?url=typingmind.com
+logo: https://www.typingmind.com/apple-icon-180x180.png
+relation: I built it or work on it
+added: 2026-11-27
+submitter: ngocnguyen125125
+source: #5
