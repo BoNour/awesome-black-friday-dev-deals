@@ -6,6 +6,9 @@ code:
 starts: 2026-11-27
 ends: 2026-12-01
 description: Website security scanner that checks a domain for NIS2 exposure and rescans it daily
-image:
-logo:
-relation: No relation
+image: https://guard.report/api/og?type=homepage
+logo: https://guard.report/apple-icon.png
+relation: I found it and have no relation to it
+added: 2026-11-27
+submitter: meSingh
+source: #10

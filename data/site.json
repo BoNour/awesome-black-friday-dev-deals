@@ -328,6 +328,20 @@
    "noutm": true
   },
   {
+   "id": "guard-by-offseq",
+   "name": "Guard by OffSeq",
+   "url": "https://guard.report/",
+   "category": "security",
+   "discount": "50% off the full report and first month of monitoring",
+   "code": "",
+   "starts": "2026-11-27",
+   "ends": "2026-12-01",
+   "description": "Website security scanner that checks a domain for NIS2 exposure and rescans it daily",
+   "added": "2026-11-27",
+   "image": "https://guard.report/api/og?type=homepage",
+   "logo": "https://guard.report/apple-icon.png"
+  },
+  {
    "id": "hostinger-vps",
    "name": "Hostinger VPS",
    "url": "https://www.hostinger.com/black-friday-vps-deals",
