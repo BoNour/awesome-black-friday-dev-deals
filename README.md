@@ -8,7 +8,7 @@ Black Friday 2026 deals on AI and developer tools.
 Grab a code, save some money, get back to building.
 
 <!-- stats:start -->
-**74 deals and counting** · last updated 27 Nov 2026
+**76 deals and counting** · last updated 27 Nov 2026
 <!-- stats:end -->
 
 **[Add your deal](https://github.com/meSingh/awesome-black-friday-dev-deals/new/main/deals?filename=your-product.yml&value=%23%20Add%20your%20Black%20Friday%20deal.%20It%20is%20free.%0A%23%0A%23%201.%20Rename%20this%20file%20to%20your%20product%2C%20for%20example%20acme-cli.yml%0A%23%20%20%20%20%28lowercase%20letters%2C%20digits%20and%20dashes%29.%0A%23%202.%20Fill%20in%20the%20lines%20below.%20Leave%20code%2C%20image%20and%20logo%20empty%20if%20you%20have%20none.%0A%23%203.%20Click%20%22Commit%20changes%22%2C%20then%20%22Create%20pull%20request%22.%20That%20is%20all.%0A%23%0A%23%20category%20is%20one%20of%3A%20AI%20tools%20%7C%20AI%20video%2C%20image%20and%20voice%20%7C%20Developer%20tools%20%7C%20Hosting%20and%20cloud%20%7C%20Databases%20and%20backend%20%7C%20Email%20%7C%20Design%20and%20UI%20%7C%20Starter%20kits%20%7C%20SEO%20and%20marketing%20%7C%20Courses%20and%20books%20%7C%20Productivity%20%7C%20Mac%20and%20desktop%20apps%20%7C%20Security%20%7C%20Other%0A%23%20relation%20is%20one%20of%3A%20I%20built%20it%20%7C%20I%20use%20it%20%7C%20No%20relation%0A%23%20dates%20look%20like%202026-11-27%0A%0Aname%3A%0Aurl%3A%0Acategory%3A%0Adiscount%3A%0Acode%3A%0Astarts%3A%0Aends%3A%0Adescription%3A%0Aimage%3A%0Alogo%3A%0Arelation%3A%0A)** · **[Star the list](https://github.com/meSingh/awesome-black-friday-dev-deals)** · **[Browse on dev.express](https://dev.express/black-friday/?utm_source=github&utm_medium=referral&utm_campaign=black-friday-2026)**
@@ -43,10 +43,10 @@ If the list helps you, a star and a share help other developers find it. Your li
 - [AI video, image and voice](#ai-video-image-and-voice) (10): Video, image and voice generation, with or without an API
 - [Developer tools](#developer-tools) (8): Editors, Git, APIs, testing, debugging, monitoring
 - [Hosting and cloud](#hosting-and-cloud) (6): VPS, serverless, CDN, domains, deployment
-- [Email](#email) (5): Sending, testing and email marketing
+- [Email](#email) (6): Sending, testing and email marketing
 - [Design and UI](#design-and-ui) (6): UI kits, components, icons, design tools
 - [Starter kits](#starter-kits) (3): Code templates that get a product shipped sooner
-- [SEO and marketing](#seo-and-marketing) (7): SEO, analytics, social and messaging tools
+- [SEO and marketing](#seo-and-marketing) (8): SEO, analytics, social and messaging tools
 - [Courses and books](#courses-and-books) (11): Courses, books and certifications for engineers
 - [Productivity](#productivity) (4): Tasks, notes, meetings, focus
 - [Mac and desktop apps](#mac-and-desktop-apps) (6): Utilities a developer keeps open all day
@@ -108,6 +108,7 @@ If the list helps you, a star and a share help other developers find it. Your li
 
 | Product | What it is | Deal | Dates | Link |
 |---|---|---|---|---|
+| [GetResponse](https://www.getresponse.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Email marketing platform with newsletters, automation, landing pages and signup forms | **Up to 40% off: 15% monthly, 30% yearly, 40% 2-year** | 27&nbsp;Nov&nbsp;to&nbsp;3&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://www.getresponse.com/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [MailerLite](https://www.mailerlite.com/black-friday-deal?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Email marketing platform with automation, landing pages and an API | **26% off an annual plan** with code `LITEFRIDAY26` | 17&nbsp;Nov&nbsp;to&nbsp;18&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://www.mailerlite.com/black-friday-deal?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Nuntly](https://nuntly.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Transactional email API for developers with a free tier and EU hosting | **40% off the first 12 monthly payments** with code `BLACKFRIDAY26` | Until&nbsp;31&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://nuntly.com/black-friday?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Pigeonify](https://www.pigeonify.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Email platform for marketing campaigns and transactional email with a developer API | **50% off all paid plans** with code `BLACKFRIDAY` | Until&nbsp;30&nbsp;Nov | [Get&nbsp;the&nbsp;deal](https://www.pigeonify.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
@@ -139,6 +140,7 @@ If the list helps you, a star and a share help other developers find it. Your li
 |---|---|---|---|---|
 | [Hypefury](https://hypefury.com/features-pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Scheduling and automation tool for posting to X, LinkedIn and other social platforms | **40% off Creator or Pro for 2 months** with code `BLACKFRIDAY40` | Until&nbsp;30&nbsp;Nov | [Get&nbsp;the&nbsp;deal](https://hypefury.com/features-pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Pirsch Analytics](https://pirsch.io/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Cookie-free web analytics service with an API, hosted in the EU | **20% off the first monthly or annual payment** with code `BLACKFRIDAY26` | Until&nbsp;31&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://pirsch.io/pricing?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
+| [PostNitro](https://postnitro.ai/plans?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | Tool for designing carousels and social posts, then scheduling and publishing them to social accounts | **40% off Creator+ and Team+ yearly plans** | 27&nbsp;Nov&nbsp;to&nbsp;30&nbsp;Nov | [Get&nbsp;the&nbsp;deal](https://postnitro.ai/plans?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [SE Ranking](https://seranking.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | SEO platform for rank tracking, site audits, keyword research and AI search visibility | **Extra 20% off annual plans and add-ons** | Until&nbsp;4&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://seranking.com/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Seobility](https://www.seobility.net/en/lp/blackfriday26/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | SEO tool for site audits, rank tracking and backlink monitoring | **60 days of Premium free, then 15% off** with code `blackfriday26ext` | 17&nbsp;Nov&nbsp;to&nbsp;6&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://www.seobility.net/en/lp/blackfriday26/?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
 | [Startup Buffer](https://startupbuffer.com/promote?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) | A startup directory with 33,000+ listings, where homepage features put a product in front of people browsing new startups | **50% off homepage features** | 26&nbsp;Nov&nbsp;to&nbsp;4&nbsp;Dec | [Get&nbsp;the&nbsp;deal](https://startupbuffer.com/promote?utm_source=dev.express&utm_medium=github&utm_campaign=black-friday-2026) |
