@@ -225,6 +225,20 @@
    "added": "2026-11-26"
   },
   {
+   "id": "devutils",
+   "name": "DevUtils",
+   "url": "https://devutils.com/pricing/",
+   "category": "dev",
+   "discount": "60% off all plans",
+   "code": "BLACKFRIDAY2026",
+   "starts": "2026-11-02",
+   "ends": "2026-12-30",
+   "description": "Offline all-in-one developer toolbox for macOS with 47+ native tools such as a JSON formatter, JWT debugger, Base64 and regex tester",
+   "added": "2026-11-27",
+   "image": "https://devutils.com/social-poster.png",
+   "logo": "https://devutils.com/apple.png"
+  },
+  {
    "id": "elevenlabs",
    "name": "ElevenLabs",
    "url": "https://elevenlabs.io/pricing",

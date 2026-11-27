@@ -6,6 +6,9 @@ code: BLACKFRIDAY2026
 starts: 2026-11-02
 ends: 2026-12-30
 description: Offline all-in-one developer toolbox for macOS with 47+ native tools such as a JSON formatter, JWT debugger, Base64 and regex tester
-image:
-logo:
-relation: I built it
+image: https://devutils.com/social-poster.png
+logo: https://devutils.com/apple.png
+relation: I built it or work on it
+added: 2026-11-27
+submitter: ngocnguyen125125
+source: #6
