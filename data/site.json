@@ -225,6 +225,20 @@
    "added": "2026-11-26"
   },
   {
+   "id": "desktime",
+   "name": "DeskTime",
+   "url": "https://desktime.com/pricing",
+   "category": "productivity",
+   "discount": "50% off annual plans for teams of 5 or more",
+   "code": "DTBF50",
+   "starts": "2026-11-27",
+   "ends": "2026-12-07",
+   "description": "Time tracking app for teams that records hours, projects and app usage automatically",
+   "added": "2026-11-27",
+   "image": "https://desktime.com/static/og/pricing.png",
+   "logo": "https://desktime.com/favicon/apple-touch-icon.png"
+  },
+  {
    "id": "devutils",
    "name": "DevUtils",
    "url": "https://devutils.com/pricing/",

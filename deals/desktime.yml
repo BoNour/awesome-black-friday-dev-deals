@@ -6,6 +6,9 @@ code: DTBF50
 starts: 2026-11-27
 ends: 2026-12-07
 description: Time tracking app for teams that records hours, projects and app usage automatically
-image:
-logo:
-relation: No relation
+image: https://desktime.com/static/og/pricing.png
+logo: https://desktime.com/favicon/apple-touch-icon.png
+relation: I found it and have no relation to it
+added: 2026-11-27
+submitter: meSingh
+source: #9
